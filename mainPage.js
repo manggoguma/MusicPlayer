@@ -48,8 +48,8 @@ const getData = async () => {
       },
     });
     const data = await response.json();
-    console.log(data.tracks.items);
-    contentHTML += `${data.tracks.items}`;
+    console.log(data);
+    contentHTML += `${data}`;
     document.getElementById("content").innerHTML = contentHTML;
   } catch (error) {
     console.error("Error:", error);
