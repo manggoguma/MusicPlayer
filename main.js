@@ -136,3 +136,5 @@ const drawAlbum = (data) => {
   });
   document.getElementById("album-area").innerHTML = albumHTML;
 };
+
+///ddd
