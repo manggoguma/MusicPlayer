@@ -57,19 +57,28 @@
                 <h3 class="music-title">L’Amour, Les Baguettes, Paris</h3>
                 <p class="music_artist">스텔라장(Stella Jang)</p>
             </div>
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="play-control" id="musicContainer">
-            <audio id="audio" src="./music/hey.mp3" onloadstart="this.volume=0.005"></audio>
-            <div class="progress-container" id="progress-container">
-                <div class="progress" id="progress"></div>
-            </div>
             <div class="navigation">
+                <button id="random" class="action-btn"><i class="fa-solid fa-shuffle"></i></button>
                 <button id="prev" class="action-btn"><i class="fa-sharp fa-solid fa-backward"></i></button>
                 <button id="play" class="actiong-btn big"><i class="fa-solid fa-play"></i></button>
                 <button id="next" class="actiong-btn"><i class="fa-sharp fa-solid fa-forward"></i></button>
+                <button id="rotate" class="action-btn"><i class="fa-solid fa-rotate"></i></button>
+            </div>
+            <div class="progress-container" id="play-control">
+                <div class="progress" id="progress"></div>
             </div>
         </div>
-        <div class="ect-bar"></div>
+        <div class="ect-bar">
+            <button><i class="fa-solid fa-microphone"></i></button>
+            <button><i class="fa-solid fa-list"></i></button>
+            <div class="progress-container" id="volume-control">
+                <button><i class="fa-solid fa-volume-high"></i></button>
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
     </footer>
     <!--// music player-->
     <script src="https://kit.fontawesome.com/97aea18dfc.js" crossorigin="anonymous"></script>
