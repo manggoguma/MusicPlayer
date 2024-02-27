@@ -36,7 +36,6 @@ const getToken = async () => {
 };
 
 // 노래 데이터 요청
-// 두가지 정보를 같이 요구하다보니 searchParams가 꼬여서 url을 직접 할당했습니다.
 let spoty_url = `https://api.spotify.com/v1/search?`;
 
 const getData = async (url) => {
@@ -69,24 +68,27 @@ const getData = async (url) => {
 // playlist: 플레이리스트
 // track: 노래
 
-// 검색 기능
-const spotifySearch = async (type) => {
-  let q = searchInput.value;
+// 검색용 함수
+const spotifySearch = async (q, type) => {
   let url = `${spoty_url}q=${q}&type=${type}`;
   return getData(url);
 };
 
+// 검색 기능
 const search = async () => {
   try {
-    let artistRes = await spotifySearch("artist");
-    let albumRes = await spotifySearch("album");
-    let trackRes = await spotifySearch("track");
+    let q = searchInput.value;
+    let artistRes = await spotifySearch(q, "artist");
+    let albumRes = await spotifySearch(q, "album");
+    let trackRes = await spotifySearch(q, "track");
+
     console.log(artistRes);
     console.log(albumRes);
     console.log(trackRes);
 
     drawArtist(artistRes);
     drawAlbum(albumRes);
+    drawTrack(trackRes);
   } catch (err) {
     console.error(err);
   }
@@ -129,7 +131,9 @@ const drawAlbum = (data) => {
     albumHTML += `
     <div class="album-container">
     <img src="${data.images[0].url}" alt="" style="width: 100px;">
-    <span>${data.name}</span>
+    <span>${
+      data.name.length > 20 ? data.name.substring(0, 20) + "..." : data.name
+    }</span>
     <span>${data.artists[0].name}</span>
 </div>
     `;
@@ -137,4 +141,20 @@ const drawAlbum = (data) => {
   document.getElementById("album-area").innerHTML = albumHTML;
 };
 
-///ddd
+// 곡 내용 보여주기
+const drawTrack = (data) => {
+  let trackData = data.tracks.items;
+  let trackHTML = ``;
+  trackData.forEach((data) => {
+    trackHTML += `
+        <div class="track-container">
+        <img src="${data.album.images[0].url}" alt="" style="width: 100px;">
+        <span>${
+          data.name.length > 20 ? data.name.substring(0, 20) + "..." : data.name
+        }</span>
+        <span>${data.artists[0].name}</span>
+    </div>
+        `;
+    document.getElementById("track-area").innerHTML = trackHTML;
+  });
+};
