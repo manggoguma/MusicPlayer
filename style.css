@@ -7,6 +7,13 @@ body {
   position: relative;
   background-color: #000;
 }
+button{
+  border: 0;
+  background:none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: normal;
+}
 
 /* search-bar */
 #search-bar {
@@ -73,7 +80,6 @@ body {
 }
 
 /* content */
-/* #content{} */
 .container {
   margin: 80px 15px;
   max-width: 1600px;
@@ -104,28 +110,99 @@ body {
   background-color: #360909;
   background-color: #181818;
   color: #fff;
-  padding: 10px 0;
+  padding: 10px 50px 15px;
 }
 
 #music-player .music-info {
   width: 33.3%;
   display: flex;
-  justify-content: space-around;
 }
 .music-info .thumb {
   display: flex;
+  margin-right: 20px;
 }
 .music-info .music-text h3 {
   font-size: 18px;
   font-weight: 700;
 }
+.music-info .music-text p:hover{
+  text-decoration: underline;
+}
 .music-info .music-text p {
   font-size: 14px;
   margin-bottom: 0;
+  color: #a2a2a2;
 }
+.music-info .heart-btn{
+  background: none;
+  border: 0;
+  margin-bottom: 0;
+  color: #a2a2a2;
+  margin-left: 80px;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+}
+
+.music-info .heart-btn:hover,.music-info .heart-btn:active,.heart-btn:focus{
+  color: #ff4242;
+}
+
 #music-player .play-control {
   width: 33.3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+.play-control .navigation{
+  display: flex;
+  justify-content: center;
+}
+.play-control .navigation button{
+  margin: 0 15px;
+}
+.play-control .navigation button:hover,.play-control .navigation button:focus{
+  color: #27ae60;
+}
+.play-control .navigation button.big:hover,.play-control .navigation button.big:focus{
+  color: #27ae60;
+  border-color: #27ae60;
+}
+.play-control .navigation button.big{
+  border: 2px solid #fff;
+  border-radius: 50px;
+  width: 35px;
+  height: 35px;
+}
+#music-player .progress{
+  height: 3px;
+  background-color: #818181;
+}
+#music-player .progress:active{
+  background-color: #fff;
+}
+
 #music-player .ect-bar {
   width: 33.3%;
+  display: flex;
+  justify-content: flex-end;
+}
+.ect-bar button{
+  margin-left: 25px;
+}
+.ect-bar button:hover,.ect-bar button:focus{
+  color: #27ae60;
+}
+.ect-bar .progress-container{
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+.ect-bar .progress-container .progress{
+  width: 100px;
+  margin-left: 10px;
+  background-color: #818181;
+}
+.ect-bar .progress-container .progress:active{
+  background-color: #fff;
 }
