@@ -79,6 +79,19 @@ body {
   max-width: 1600px;
   height: 1000px;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+.singer-image-bottom {
+  display: flex;
+}
+#album-area {
+  display: flex;
+  flex-direction: row;
+}
+.album-container {
+  display: flex;
+  flex-direction: column;
 }
 
 /* music-player */

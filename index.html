@@ -17,13 +17,14 @@
                 <div class="nav-logo">
                     <a href="#"><img src="image/logo.png"></a>
                 </div>
-                <form class="d-flex form-box" role="search">
+                <!-- form 형식이라 데이터가 갱신되어서 onsubmit을 추가했습니다. -->
+                <form class="d-flex form-box" role="search" onsubmit="return false;">
                     <div class="search-container">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input class="form-control me-2 " type="search" placeholder="노래, 앨범, 아티스트 검색"
+                        <input id="search-input" class="form-control me-2 " type="text" placeholder="노래, 앨범, 아티스트 검색"
                             aria-label="Search">
                     </div>
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" type="submit" onclick="search()">Search</button>
                 </form>
             </div>
         </nav>
@@ -32,18 +33,15 @@
 
     <!--main content-->
     <div id="content" class="container">
-        <div>
-            <div>
-                <img src="./image/iu_test.jpeg" alt="iu_test">
-                <span>아이유</span>
-                <img src="./image/iu_test.jpeg" alt="iu_test">
-                <span>아이유</span>
-            </div>
-            <div>
-                <span>곡</span>
-
-            </div>
+        <div id="artist-area">
+            <!-- 아티스트 정보 -->
         </div>
+        <hr>
+        <div id="album-area">
+            <!-- 앨범 정보 -->
+        </div>
+        <hr>
+    </div>
     </div>
     <!--// main content-->
 
