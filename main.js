@@ -130,13 +130,20 @@ const drawAlbum = (data) => {
   let albumData = data.albums.items;
   let albumHTML = ``;
   albumData.forEach((data) => {
+    const albumObj = {
+      img: data.images[0].url,
+      albumName: data.name,
+      artistName: data.artists[0].name,
+    };
     albumHTML += `
     <div class="album-container">
-    <img src="${data.images[0].url}" alt="" style="width: 100px;">
+    <img src="${albumObj.img}" alt="" style="width: 100px;">
     <span>${
-      data.name.length > 20 ? data.name.substring(0, 20) + "..." : data.name
+      albumObj.albumName.length > 20
+        ? albumObj.albumName.substring(0, 20) + "..."
+        : albumObj.albumName
     }</span>
-    <span>${data.artists[0].name}</span>
+    <span>${albumObj.artistName}</span>
 </div>
     `;
   });
@@ -148,13 +155,20 @@ const drawTrack = (data) => {
   let trackData = data.tracks.items;
   let trackHTML = ``;
   trackData.forEach((data) => {
+    const trackObj = {
+      img: data.album.images[0].url,
+      trackName: data.name,
+      artistName: data.artists[0].name,
+    };
     trackHTML += `
         <div class="track-container">
-        <img src="${data.album.images[0].url}" alt="" style="width: 100px;">
+        <img src="${trackObj.img}" alt="" style="width: 100px;">
         <span>${
-          data.name.length > 20 ? data.name.substring(0, 20) + "..." : data.name
+          trackObj.trackName.length > 20
+            ? trackObj.trackName.substring(0, 20) + "..."
+            : trackObj.trackName
         }</span>
-        <span>${data.artists[0].name}</span>
+        <span>${trackObj.artistName}</span>
     </div>
         `;
     document.getElementById("track-area").innerHTML = trackHTML;
