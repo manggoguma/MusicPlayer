@@ -88,8 +88,12 @@ button {
   display: flex;
   flex-direction: column;
 }
+
 .singer-image-bottom {
   display: flex;
+}
+.singer-image-bottom img:hover {
+  cursor: pointer;
 }
 #album-area {
   display: flex;
@@ -98,6 +102,9 @@ button {
 .album-container {
   display: flex;
   flex-direction: column;
+}
+.album-container img:hover {
+  cursor: pointer;
 }
 #track-area {
   display: flex;
