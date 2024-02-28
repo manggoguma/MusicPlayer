@@ -35,7 +35,7 @@ const getToken = async () => {
   }
 };
 
-// 노래 데이터 요청
+// 노래 데이터 검색
 let spoty_search_url = `https://api.spotify.com/v1/search?`;
 
 const getData = async (url) => {
@@ -52,7 +52,7 @@ const getData = async (url) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행 getData는 필요에 맞춰 변경해야할듯
+    // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행
     if (error.status === 401) {
       await getToken();
       return getData();
@@ -69,7 +69,7 @@ const getData = async (url) => {
 // track: 노래
 
 // 검색용 함수
-const spotifySearch = async (q, type) => {
+const spotifySearch = (q, type) => {
   let url = `${spoty_search_url}q=${q}&type=${type}`;
   return getData(url);
 };
