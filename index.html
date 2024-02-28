@@ -41,9 +41,6 @@
             <!-- 앨범 정보 -->
         </div>
         <hr>
-        <div id="track-area">
-            <!-- 곡 정보 -->
-        </div>
     </div>
     </div>
     <!--// main content-->
@@ -62,11 +59,12 @@
         </div>
         <div class="play-control" id="musicContainer">
             <div class="navigation">
-                <button id="random" class="action-btn"><i class="fa-solid fa-shuffle"></i></button>
-                <button id="prev" class="action-btn"><i class="fa-sharp fa-solid fa-backward"></i></button>
-                <button id="play" class="actiong-btn big"><i class="fa-solid fa-play"></i></button>
-                <button id="next" class="actiong-btn"><i class="fa-sharp fa-solid fa-forward"></i></button>
-                <button id="rotate" class="action-btn"><i class="fa-solid fa-rotate"></i></button>
+                <button id="random" class="action-btn" onclick=""><i class="fa-solid fa-shuffle"></i></button>
+                <button id="prev" class="action-btn" onclick=""><i class="fa-sharp fa-solid fa-backward"></i></button>
+                <button id="playBtn" class="actiong-btn big" onclick=""><i class="fa-solid fa-play"></i></button>
+                <button id="pauseBtn" class="actiong-btn big none" onclick=""><i class="fa-solid fa-pause"></i></button>
+                <button id="next" class="actiong-btn" onclick=""><i class="fa-sharp fa-solid fa-forward"></i></button>
+                <button id="rotate" class="action-btn" onclick=""><i class="fa-solid fa-rotate"></i></button>
             </div>
             <div class="progress-container" id="play-control">
                 <div class="progress" id="progress"></div>
@@ -84,6 +82,7 @@
     <!--// music player-->
     <script src="https://kit.fontawesome.com/97aea18dfc.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script src="./main.js"></script>
 </body>
 

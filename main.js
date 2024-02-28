@@ -166,3 +166,87 @@ let spoty_kr_category = `https://api.spotify.com/v1/recommendations?market=KR&se
 
 console.log("new", getData(spoty_newReleases));
 console.log("kr", getData(spoty_kr_category));
+
+//SDK 액세스 토근
+const device_id =
+  "BQBi2AcV1ue_d93guNuxC_-MuaBVbQeIpJBDD0GGaCQoLC42pztSxuSmRJMMh-RJJtD7efAsdccVT5Tk-RIC01efmO3CbFtocfKeKi3HKefFq3Sc0YLIueItr8urgdETvWxLmqW1XL2ZgJaZ7VDis3KpPUbOeuFQbRE5wmlpDB_5Mu7PTemZgAVwoNeUlbcA-rYaZ91xcan12-dOFX5CgABZbXph";
+
+//SDK 액세스 토근 - 초기화
+window.onSpotifyWebPlaybackSDKReady = () => {
+  getToken();
+  const player = new Spotify.Player({
+    name: "Web Playback SDK Quick Start Player",
+    getOAuthToken: (cb) => {
+      cb(token);
+    },
+    volume: 0.5,
+  });
+  console.log("accept", player);
+
+  //연결이 끊어진 경우 not_ready이벤트
+  //1. Ready
+  player.addListener("ready", function ({ device_id }) {
+    console.log("Ready with Device ID", device_id);
+  });
+
+  //2. Not Ready
+  player.addListener("not_ready", function ({ device_id }) {
+    console.log("Device ID has gone offline", device_id);
+  });
+};
+
+// 음악 트랙 재생
+function playTrack(device_id, trackUri) {
+  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token.access_token, // 토큰에는 access_token이 들어 있습니다.
+    },
+    body: JSON.stringify({
+      uris: [trackUri],
+    }),
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        console.log("Track is now playing");
+      } else {
+        console.error("Failed to play track");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+// 음악 재생 중지
+function pauseTrack(device_id) {
+  fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${device_id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token.access_token, // 토큰에는 access_token이 들어 있습니다.
+    },
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        console.log("Playback paused");
+      } else {
+        console.error("Failed to pause playback");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+// 재생 버튼 클릭 시 음악 트랙 재생
+document.getElementById("playBtn").onclick = function () {
+  const trackUri = "spotify:track:TRACK_ID"; // 재생할 트랙의 URI
+  playTrack(device_id, trackUri);
+};
+
+// 일시 중지 버튼 클릭 시 음악 재생 중지
+document.getElementById("pauseBtn").onclick = function () {
+  pauseTrack(device_id);
+};
