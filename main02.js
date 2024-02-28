@@ -1,10 +1,9 @@
+let token = "BQBfgysxEW7t5vk5o7rMXjkSaKlBcNAR85AQq1dUhpDvx3CMAG8EexRW3tIJpfApB2CPQ-ZFOufQn_R3IXPdGb8BHcRi_oB8FiNBzDKp0SVsDCu5O4XRZgV6JziQEgj8GjfL6QFa6rpaJPyBtxfsIdBl_Sem2VfDkugDANXjJG80yC13wXvFK2V3wgKdH0XSzr4N3JMawzWSajqJtpo1C1NfmLfC";
 const client_id = "31fc18db9a8f46e7b0f17f84a143787d";
 const client_secret = "bbfa00cb2eb0482b98cc830df3de45b0";
 const redirect_uri = "http://localhost:5500/callback";
-const albumId=""
 
-
-let token; 
+let albums=[];
 
 // 토큰 요청
 const getToken = async () => {
@@ -27,46 +26,77 @@ const getToken = async () => {
     console.error("Error:", error);
     }
 };
-// // 앨범 검색
-// const searchAlbum = async (albumName) => {
-//     const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(albumName)}&type=album`;
-//     const response = await fetch(url, {
-//         headers: {
-//             Authorization: `Bearer ${token.access_token}`,
-//         },
-//     });
-//     const data = await response.json();
-//     console.log("ddd", data);
-// }
 
-// // getToken 함수 호출
-// getToken().then(() => {
-//     // 앨범 검색 함수 호출
-//     searchAlbum("Abbey Road"); // 예시 앨범 이름
-// });
+// 노래 데이터 요청
+let spoty_url = `https://api.spotify.com/v1/search?`;
 
-// 앨범 가져오기
-const getAlbum = async () => {
-    const url = `https://api.spotify.com/v1/albums?ids=${client_id}`;
+const getData = async (url) => {
+    // 토큰이 없을 경우 token 요청
+    if (!token) {
+    await getToken();
+    }
+    try {
+    const response = await fetch(url, {
+        headers: {
+        Authorization: `Bearer ${token.access_token}`,
+        },
+    });
+    const data = await response.json();
+    return data;
+    } catch (error) {
+      // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행 getData는 필요에 맞춰 변경해야할듯
+    if (error.status === 401) {
+        await getToken();
+        return getData();
+    } else {
+        console.error("Error:", error);
+    }
+    }
+};
+
+// 최신앨범 가져오기
+const getNewAlbum = async () => {
+    const url = new URL(`https://api.spotify.com/v1/browse/new-releases?country=KR&limit=6`);
     const response = await fetch(url, {
         headers: {
             Authorization: `Bearer ${token.access_token}`,
         },
     });
     const data = await response.json();
-    console.log("ddd", data);
-}
+    albums = data.albums.items;
+    render();
+    console.log("앨범 정보:",albums );
 
-// getToken 함수 호출
+    // 각 앨범에 대해 아티스트 정보 가져오기
+    data.albums.items.forEach(album => {
+        console.log("앨범 이름:", album.name);
+        console.log("앨범 이미지 URL:", album.images[0].url);
+        album.artists.forEach(artist => {
+            console.log("아티스트 이름:", artist.name);
+        });
+        console.log("--------------------");
+    });
+};
+
+// 토큰 요청 후 앨범 정보 가져오기
 getToken().then(() => {
-    // 앨범 가져오기 함수 호출
-    getAlbum(); // 예시 앨범 ID
+    getNewAlbum();
 });
 
-const render=()=> {
-    const albumHTML=``;
+const render = () => {
+    const newAlbumHTML = albums.map((item) => `<div class="row">
+    <div class="col">
+        <div class="col-lg-8">
+            <img class="album-img-size" src=${item.images[0].url} alt="">
+        </div>
+        <div class="col-lg-4">
+            <h3>${item.name}</h3>
+            <p>이름</p>
+        </div>
+    </div>
+    
+</div>`)
 
-    document.getElementById('lowerBar').innerHTML=albumHTML;
+    document.getElementById("lowerBar").innerHTML = newAlbumHTML;
 }
-
 

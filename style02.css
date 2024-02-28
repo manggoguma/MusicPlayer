@@ -2,13 +2,16 @@
     display: flex;
     justify-content: space-around;
 }
-
+.row{
+    display: inline-block;
+    float: left;
+}
 .col{
     background-color: black;
     /* opacity: 0.1; */
     width: 80wh;
     height: 250px;
-    
+    margin-left: 2em;
 }
 .col-lg-8{
     border: solid 2px #ff0000;
