@@ -55,7 +55,7 @@ const getData = async (url) => {
     // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행
     if (error.status === 401) {
       await getToken();
-      return getData();
+      return getData(url);
     } else {
       console.error("Error:", error);
     }
@@ -97,39 +97,27 @@ const search = async () => {
 };
 
 // 아티스트 내용 보여주기
-const drawArtist = (data) => {
-  let artistData = data.artists.items;
+const drawArtist = ({ artists }) => {
+  let artistData = artists.items;
+  document.getElementById("singer-top").innerHTML = `
+  <img src="${artistData[0].images[0].url}" alt="${artistData[0].name}" style="width: 200px;">
+  <span>${artistData[0].name}</span>`;
   let artistHTML = ``;
-  artistHTML = `
+  for (let i = 1; i < 4; i++) {
+    artistHTML += `
     <div>
-            <div class="singer-image-top">
-                <img src="${artistData[0].images[0].url}" alt="iu_test" style="width: 200px;">
-                <span>${artistData[0].name}</span>
-            </div>
-            <div class="singer-image-bottom">
-                <div>
-                    <img src="${artistData[1].images[0].url}" style="width: 50px;">
-                    <span>${artistData[1].name}</span>
-                </div>
-                <div>
-                    <img src="${artistData[2].images[0].url}" alt="iu_test" style="width: 50px;">
-                    <span>${artistData[2].name}</span>
-                </div>
-                <div>
-                    <img src="${artistData[3].images[0].url}" alt="iu_test" style="width: 50px;">
-                    <span>${artistData[3].name}</span>
-                </div>
-            </div>
-        </div>
+        <img src="${artistData[i].images[0].url}" alt="${artistData[i].name}" style="width: 50px;">
+        <span>${artistData[i].name}</span>
+    </div>
     `;
-  document.getElementById("artist-area").innerHTML = artistHTML;
+  }
+  document.getElementById("singer-bottom").innerHTML = artistHTML;
 };
 
 // 앨범 내용 보여주기
-const drawAlbum = (data) => {
-  let albumData = data.albums.items;
+const drawAlbum = ({ albums }) => {
   let albumHTML = ``;
-  albumData.forEach((data) => {
+  albums.items.forEach((data) => {
     const albumObj = {
       img: data.images[0].url,
       albumName: data.name,
@@ -151,10 +139,9 @@ const drawAlbum = (data) => {
 };
 
 // 곡 내용 보여주기
-const drawTrack = (data) => {
-  let trackData = data.tracks.items;
+const drawTrack = ({ tracks }) => {
   let trackHTML = ``;
-  trackData.forEach((data) => {
+  tracks.items.forEach((data) => {
     const trackObj = {
       img: data.album.images[0].url,
       trackName: data.name,
@@ -175,92 +162,10 @@ const drawTrack = (data) => {
   });
 };
 
-let spoty_newReleases = `https://api.spotify.com/v1/browse/new-releases?country=KR`;
-let spoty_kr_category = `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop`;
+// let spoty_newReleases = `https://api.spotify.com/v1/browse/new-releases?country=KR`;
+// let spoty_kr_category = `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop`;
+// let spoty_kr_playList = `https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFQtzIMjOW2bE/playlists`;
 
-console.log("new", getData(spoty_newReleases));
-console.log("kr", getData(spoty_kr_category));
-
-//SDK 액세스 토근
-const device_id =
-  "BQBi2AcV1ue_d93guNuxC_-MuaBVbQeIpJBDD0GGaCQoLC42pztSxuSmRJMMh-RJJtD7efAsdccVT5Tk-RIC01efmO3CbFtocfKeKi3HKefFq3Sc0YLIueItr8urgdETvWxLmqW1XL2ZgJaZ7VDis3KpPUbOeuFQbRE5wmlpDB_5Mu7PTemZgAVwoNeUlbcA-rYaZ91xcan12-dOFX5CgABZbXph";
-
-//SDK 액세스 토근 - 초기화
-window.onSpotifyWebPlaybackSDKReady = () => {
-  getToken();
-  const player = new Spotify.Player({
-    name: "Web Playback SDK Quick Start Player",
-    getOAuthToken: (cb) => {
-      cb(token);
-    },
-    volume: 0.5,
-  });
-  console.log("accept", player);
-
-  //연결이 끊어진 경우 not_ready이벤트
-  //1. Ready
-  player.addListener("ready", function ({ device_id }) {
-    console.log("Ready with Device ID", device_id);
-  });
-
-  //2. Not Ready
-  player.addListener("not_ready", function ({ device_id }) {
-    console.log("Device ID has gone offline", device_id);
-  });
-};
-
-// 음악 트랙 재생
-function playTrack(device_id, trackUri) {
-  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token.access_token, // 토큰에는 access_token이 들어 있습니다.
-    },
-    body: JSON.stringify({
-      uris: [trackUri],
-    }),
-  })
-    .then((response) => {
-      if (response.status === 204) {
-        console.log("Track is now playing");
-      } else {
-        console.error("Failed to play track");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
-// 음악 재생 중지
-function pauseTrack(device_id) {
-  fetch(`https://api.spotify.com/v1/me/player/pause?device_id=${device_id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token.access_token, // 토큰에는 access_token이 들어 있습니다.
-    },
-  })
-    .then((response) => {
-      if (response.status === 204) {
-        console.log("Playback paused");
-      } else {
-        console.error("Failed to pause playback");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
-// 재생 버튼 클릭 시 음악 트랙 재생
-document.getElementById("playBtn").onclick = function () {
-  const trackUri = "spotify:track:TRACK_ID"; // 재생할 트랙의 URI
-  playTrack(device_id, trackUri);
-};
-
-// 일시 중지 버튼 클릭 시 음악 재생 중지
-document.getElementById("pauseBtn").onclick = function () {
-  pauseTrack(device_id);
-};
+// console.log("new", getData(spoty_newReleases));
+// console.log("kr", getData(spoty_kr_category));
+// console.log("playlist", getData(spoty_kr_playList));
