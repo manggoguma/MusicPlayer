@@ -36,7 +36,7 @@ const getToken = async () => {
 };
 
 // 노래 데이터 요청
-let spoty_url = `https://api.spotify.com/v1/search?`;
+let spoty_search_url = `https://api.spotify.com/v1/search?`;
 
 const getData = async (url) => {
   // 토큰이 없을 경우 token 요청
@@ -70,7 +70,7 @@ const getData = async (url) => {
 
 // 검색용 함수
 const spotifySearch = async (q, type) => {
-  let url = `${spoty_url}q=${q}&type=${type}`;
+  let url = `${spoty_search_url}q=${q}&type=${type}`;
   return getData(url);
 };
 
@@ -82,11 +82,13 @@ const search = async () => {
     let albumRes = await spotifySearch(q, "album");
     let trackRes = await spotifySearch(q, "track");
 
-    console.log(artistRes);
-    console.log(albumRes);
-    console.log(trackRes);
+    console.log("artist", artistRes);
+    console.log("album", albumRes);
+    console.log("track", trackRes);
 
-    drawArtist(artistRes);
+    if (artistRes?.artists?.items.length !== 0) {
+      drawArtist(artistRes);
+    }
     drawAlbum(albumRes);
     drawTrack(trackRes);
   } catch (err) {
@@ -158,3 +160,9 @@ const drawTrack = (data) => {
     document.getElementById("track-area").innerHTML = trackHTML;
   });
 };
+
+let spoty_newReleases = `https://api.spotify.com/v1/browse/new-releases?country=KR`;
+let spoty_kr_category = `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop`;
+
+console.log("new", getData(spoty_newReleases));
+console.log("kr", getData(spoty_kr_category));
