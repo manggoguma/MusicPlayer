@@ -64,24 +64,52 @@ const getNewAlbum = async () => {
     });
     const data = await response.json();
     albums = data.albums.items;
-    render();
-    console.log("앨범 정보:",albums );
-
-    // 각 앨범에 대해 아티스트 정보 가져오기
-    data.albums.items.forEach(album => {
-        console.log("앨범 이름:", album.name);
-        console.log("앨범 이미지 URL:", album.images[0].url);
-        album.artists.forEach(artist => {
-            console.log("아티스트 이름:", artist.name);
-        });
-        console.log("--------------------");
-    });
+    render();    
 };
 
 // 토큰 요청 후 앨범 정보 가져오기
 getToken().then(() => {
     getNewAlbum();
 });
+
+// 더보기 함수
+let folderMore = false;
+
+const openMore = async () => {
+    const url = new URL(`https://api.spotify.com/v1/browse/new-releases?country=KR&limit=20`);
+    const response = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${token.access_token}`,
+        },
+    });
+    const data = await response.json();
+    albums = data.albums.items;
+    render();
+    folderMore=true;
+};
+
+// 기존 6개만 다시 보여주기
+const returnOri = async () => {
+    const url = new URL(`https://api.spotify.com/v1/browse/new-releases?country=KR&limit=6`);
+    const response = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${token.access_token}`,
+        },
+    });
+    const data = await response.json();
+    albums = data.albums.items;
+    render();
+    folderMore = false;
+};
+
+const toggleMore = () => {
+    if (folderMore) {
+        returnOri();
+    } else {
+        openMore();
+    }
+    folderMore = !folderMore;
+};
 
 const render = () => {
     const newAlbumHTML = albums.map((item) => {
@@ -100,6 +128,7 @@ const render = () => {
     });
 
     document.getElementById("lowerBar").innerHTML = newAlbumHTML.join('');
+    
 }
 
 
