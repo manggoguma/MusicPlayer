@@ -44,6 +44,7 @@ button {
   padding: 7px 50px;
   background-color: rgba(125, 125, 125, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  color:#fff
 }
 .navbar .box .search-container input::placeholder {
   color: #808080;
