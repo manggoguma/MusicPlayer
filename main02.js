@@ -84,19 +84,22 @@ getToken().then(() => {
 });
 
 const render = () => {
-    const newAlbumHTML = albums.map((item) => `<div class="row">
-    <div class="col">
-        <div class="col-lg-8">
-            <img class="album-img-size" src=${item.images[0].url} alt="">
-        </div>
-        <div class="col-lg-4">
-            <h3>${item.name}</h3>
-            <p>이름</p>
-        </div>
-    </div>
-    
-</div>`)
+    const newAlbumHTML = albums.map((item) => {
+        const artists = item.artists.map(artist => artist.name).join(', ');
+        return `<div class="row">
+            <div class="col">
+                <div class="col-lg-8">
+                    <img class="album-img-size" src=${item.images[0].url} alt="">
+                </div>
+                <div class="col-lg-4">
+                    <h5>${item.name}</h5>
+                    <p>${artists}</p>
+                </div>
+            </div>
+        </div>`;
+    });
 
-    document.getElementById("lowerBar").innerHTML = newAlbumHTML;
+    document.getElementById("lowerBar").innerHTML = newAlbumHTML.join('');
 }
+
 
