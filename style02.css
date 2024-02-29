@@ -24,7 +24,20 @@ body {
     margin-left: 2em; /* col간 간격*/
     margin-top: 1em;
 }
+.recommendRow{
+    display: inline-block;
+    float:left;
+    margin-left: 2em; /* col간 간격*/
+    margin-top: 1em;
+}
 .col{
+    width: 80wh;
+    height: 250px;
+    box-shadow: 2px 2px 3px #666;
+    border-radius: 10%;
+    background-color: #202020;
+}
+.recommendCol{
     width: 80wh;
     height: 250px;
     box-shadow: 2px 2px 3px #666;
@@ -77,6 +90,3 @@ body {
     flex-wrap: wrap;
 }
 
-#recommendAlbum{
-    margin-top: 2em;
-}
