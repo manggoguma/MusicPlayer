@@ -71,3 +71,12 @@ body {
     color: #b8b8b8;
     margin-top: 20PX;
 }
+
+.section-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#recommendAlbum{
+    margin-top: 2em;
+}
