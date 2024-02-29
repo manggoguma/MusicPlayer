@@ -1,6 +1,9 @@
 @charset "utf-8";
 
 /* common */
+ul{
+  list-style: none;
+}
 body {
   display: flex;
   flex-direction: column;
@@ -81,7 +84,7 @@ button {
 
 /* content */
 .container {
-  margin: 80px 15px;
+  margin: 80px auto;
   max-width: 1600px;
   height: 1000px;
   color: white;
@@ -113,6 +116,13 @@ button {
 .track-container {
   flex-direction: column;
 }
+
+.track_container .track_info{margin-bottom: 50px;}
+.track_container .list_title{padding: 0 0 20px;}
+.track_container .list_title div{display: flex;justify-content: center;}
+.track_container .track_container{border-top: 1px solid;padding-top: 20px;padding-left: 0;}
+.track_container .track_music div{display: flex;justify-content: center;padding: 10px 0;}
+.track_container .album-cover{width: 70px;height: 70px;}
 
 /* music-player */
 #music-player {

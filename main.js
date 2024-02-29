@@ -251,31 +251,56 @@ const displayPlaylistInfo = async () => {
   try {
     const playlistRes = await searchPlaylist();
     const playlistContainer = document.getElementById("playlist-info");
-    
-    playlistContainer.innerHTML = `
-      <h2>Playlist Name: ${playlistRes.name}</h2>
-      <p>Owner: ${playlistRes.owner.display_name}</p>
-      <p>Total Tracks: ${playlistRes.tracks.total}</p>
+
+    let playlistHTML = `<div class="track_info">
+        <h2>Playlist Name: ${playlistRes.name}</h2>
+        <p>Owner: ${playlistRes.owner.display_name}</p>
+        <p>Total Tracks: ${playlistRes.tracks.total}</p>
+      </div>
+      <div class="row list_title">
+        <div class="col-1">#</div>
+        <div class="col-1"></div>
+        <div class="col-4">TITTLE</div>
+        <div class="col-1">MUSICIAN</div>
+        <div class="col-4">ALBUM</div>
+        <div class="col-1"><i class="fa-regular fa-clock"></i></div>
+      </div>
+      <ul class="track_container">
     `;
-    
-    const tracksList = document.createElement("ul");
-    playlistRes.tracks.items.forEach((trackData, index) => {
+
+    for (let index = 0; index < playlistRes.tracks.items.length; index++) {
+      const trackData = playlistRes.tracks.items[index];
       const track = trackData.track;
       const albumImageUrl = track.album.images[0].url;
 
-      const trackItem = document.createElement("li");
-      trackItem.innerHTML = `
-        <img src="${albumImageUrl}" alt="Album cover for ${track.album.name}" class="album-cover">
-        <span>${index + 1}. ${track.name} - ${track.artists.map(artist => artist.name).join(", ")}</span>
-      `;
-      tracksList.appendChild(trackItem);
-    });
+      //앨범 정보
+      const albumId = track.album.id;
+      const albumInfoUrl = `${spotifyUrl}albums/${albumId}?market=KR`;
+      const albumRes = await getData(albumInfoUrl);
 
-    playlistContainer.appendChild(tracksList);
+      // 재생 시간 가져오기
+      const durationMs = track.duration_ms;
+      const durationMin = Math.floor(durationMs / 60000);
+      const durationSec = ((durationMs % 60000) / 1000).toFixed(0);
+      const duration = `${durationMin}:${(durationSec < 10 ? '0' : '')}${durationSec}`;
+
+      playlistHTML += `
+        <li class="row track_music">
+          <div class="col-1">${index + 1}</div>
+          <div class="col-1"><img src="${albumImageUrl}" alt="Album cover for ${track.album.name}" class="album-cover"></div>
+          <div class="col-4">${track.name}</div>
+          <div class="col-1">${track.artists.map(artist => artist.name).join(", ")}</div>
+          <div class="col-4">${albumRes.name}</div>
+          <div class="col-1">${duration}</div>
+        </li>
+      `;
+    }
+
+    playlistHTML += `</ul>`;
+    playlistContainer.innerHTML = playlistHTML;
   } catch (error) {
     console.error("Error displaying playlist info:", error);
   }
 }
 
 displayPlaylistInfo();
-
