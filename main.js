@@ -237,7 +237,45 @@ const searchPlaylist = async (id) => {
   let spotifyPlaylistUrl = `${spotifyUrl}playlists/${id}?market=KR`;
   let playlistRes = await getData(spotifyPlaylistUrl);
   console.log(playlistRes);
+  playlistRes.tracks.items.forEach((track, index) => {
+    console.log(`${index + 1}. ${track.track.name} - ${track.track.artists.map(artist => artist.name).join(", ")}`);
+  });
+    return playlistRes;
 };
+
 
 // 플레이 리스트 정보 받아오는 함수 실행
 searchPlaylist();
+
+const displayPlaylistInfo = async () => {
+  try {
+    const playlistRes = await searchPlaylist();
+    const playlistContainer = document.getElementById("playlist-info");
+    
+    playlistContainer.innerHTML = `
+      <h2>Playlist Name: ${playlistRes.name}</h2>
+      <p>Owner: ${playlistRes.owner.display_name}</p>
+      <p>Total Tracks: ${playlistRes.tracks.total}</p>
+    `;
+    
+    const tracksList = document.createElement("ul");
+    playlistRes.tracks.items.forEach((trackData, index) => {
+      const track = trackData.track;
+      const albumImageUrl = track.album.images[0].url;
+
+      const trackItem = document.createElement("li");
+      trackItem.innerHTML = `
+        <img src="${albumImageUrl}" alt="Album cover for ${track.album.name}" class="album-cover">
+        <span>${index + 1}. ${track.name} - ${track.artists.map(artist => artist.name).join(", ")}</span>
+      `;
+      tracksList.appendChild(trackItem);
+    });
+
+    playlistContainer.appendChild(tracksList);
+  } catch (error) {
+    console.error("Error displaying playlist info:", error);
+  }
+}
+
+displayPlaylistInfo();
+
