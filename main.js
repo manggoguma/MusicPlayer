@@ -24,8 +24,8 @@ let spotifyUrl = `https://api.spotify.com/v1/`;
 // track: 노래
 
 // 검색용 함수
-const spotifySearch = ({ q, type, limit }) => {
-  let url = `${spotifyUrl}search?q=${q}&type=${type}&limit=12`;
+const spotifySearch = ({ q, type }) => {
+  let url = `${spotifyUrl}search?q=${q}&type=${type}`;
   return getData(url);
 };
 
@@ -94,11 +94,14 @@ const displayPlaylistInfo = async () => {
     const playlistContainer = document.getElementById("playlist-info");
 
     let playlistHTML = `<div class="track_info_box">
-        <img id="img" class="" width="264" src="https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-music-@576.png">
+        <img id="img" class="" width="250" src="https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-music-@576.png">
         <div class="track_info">
-          <h2>Playlist Name: ${playlistRes.name}</h2>
-          <p class="top_text">Owner: ${playlistRes.owner.display_name}</p>
+          <h2>${playlistRes.name}</h2>
+          <p class="top_text">${playlistRes.owner.display_name}</p>
           <p class="bottom_text">Total Tracks: ${playlistRes.tracks.total}</p>
+          <button class="down_icon"><i class="fa-regular fa-square-plus"></i>보관함 저장하기</button>
+          <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+          
         </div>
       </div>
       <div class="row list_title">
