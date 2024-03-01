@@ -46,10 +46,10 @@ const getData = async (url) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행 getData는 필요에 맞춰 변경해야할듯
+    // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행
     if (error.status === 401) {
       await getToken();
-      return getData();
+      return getData(url);
     } else {
       console.error("Error:", error);
     }
