@@ -1,11 +1,12 @@
 let token;
-const client_id = "31fc18db9a8f46e7b0f17f84a143787d";
-const client_secret = "bbfa00cb2eb0482b98cc830df3de45b0";
+const client_id = "027d68ef08f84e8ebbf9e24aa91a52b5";
+const client_secret = "6c38e73980514a03bc9b3be8da228ca5";
 const redirect_uri = "http://localhost:5500/callback";
 
-let albums = [];
-let tracks = [];
-let folderMore = false;
+let newReleaseAlbums;
+let recommendTracks;
+let newReleaseAlbumsMoreIsValid = false;
+let recommendTracksMoreIsValid = false;
 
 // 토큰 요청
 const getToken = async () => {
@@ -29,8 +30,7 @@ const getToken = async () => {
   }
 };
 
-// 노래 데이터 요청
-let spoty_url = `https://api.spotify.com/v1/search?`;
+let spoty_url = `https://api.spotify.com/v1/`;
 
 const getData = async (url) => {
   // 토큰이 없을 경우 token 요청
@@ -57,147 +57,49 @@ const getData = async (url) => {
 };
 
 // 최신앨범 가져오기
-const getNewAlbum = async () => {
-  if (!token) {
-    await getToken();
-  }
-  const url = new URL(
-    `https://api.spotify.com/v1/browse/new-releases?country=KR&limit=6`
-  );
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-  });
-  const data = await response.json();
-  console.log("zzzzzzz", data);
-  albums = data.albums.items;
-  render();
+const getNewReleaseAlbums = async () => {
+  let getNewReleaseAlbumsURL = `${spoty_url}browse/new-releases?country=KR&limit=20`;
+  const newReleaseAlbumsRes = await getData(getNewReleaseAlbumsURL);
+  console.log("newReleaseAlbumsRes", newReleaseAlbumsRes);
+  return newReleaseAlbumsRes.albums.items;
 };
 
-// 더보기 함수(최신)
-
-const openMore = async () => {
-  if (!token) {
-    await getToken();
+const showNewReleaseAlbums = async () => {
+  if (!newReleaseAlbums) {
+    newReleaseAlbums = await getNewReleaseAlbums();
   }
-  const url = new URL(
-    `https://api.spotify.com/v1/browse/new-releases?country=KR&limit=20`
-  );
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-  });
-  const data = await response.json();
-  albums = data.albums.items;
-  render();
-  folderMore = true;
+  let filteredNewReleaseAlbums;
+  newReleaseAlbumsMoreIsValid
+    ? (filteredNewReleaseAlbums = newReleaseAlbums)
+    : (filteredNewReleaseAlbums = newReleaseAlbums.slice(0, 6));
+  newReleaseAlbumsMoreIsValid = !newReleaseAlbumsMoreIsValid;
+  console.log(filteredNewReleaseAlbums);
+  drawNewReleaseAlbums(filteredNewReleaseAlbums);
 };
-
-// 기존 6개만 다시 보여주기(최신)
-const returnOri = async () => {
-  if (!token) {
-    await getToken();
-  }
-  const url = new URL(
-    `https://api.spotify.com/v1/browse/new-releases?country=KR&limit=6`
-  );
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-  });
-  const data = await response.json();
-  albums = data.albums.items;
-  render();
-  folderMore = false;
-};
-
-const toggleMore = () => {
-  if (folderMore) {
-    returnOri();
-  } else {
-    openMore();
-  }
-  folderMore = !folderMore;
-};
-
-let spoty_kr_category = `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=6`;
 
 // K-pop 플레이리스트 가져오기
-const getRecommend = async () => {
-  if (!token) {
-    await getToken();
-  }
-  const url = new URL(`${spoty_kr_category}`);
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token.access_token}`,
-    },
-  });
-
-  const data2 = await response.json();
-  tracks = data2.tracks;
-  console.log("왜 안나와?", tracks);
-
-  // tracks 배열에서 각 곡의 name 속성을 가져오기
-  const trackNames = tracks.map((track) => track.name);
-
-  // trackNames 배열에는 tracks 배열의 각 요소에서 name 속성만을 추출한 배열이 저장됩니다.
-  console.log("노래제목", trackNames);
-
-  // data2.tracks.items를 반환하여 다른 곳에서 사용할 수 있도록 함
-  return data2.tracks.items;
+const getRecommendTracks = async () => {
+  let spotipyKpopCategoryURL = `https://api.spotify.com/v1/recommendations?seed_genres=k-pop`;
+  const getRecommendTracksRes = await getData(spotipyKpopCategoryURL);
+  console.log("getRecommendRes", getRecommendTracksRes);
+  return getRecommendTracksRes.tracks;
 };
 
-// getNewAlbum();
-getRecommend();
+const showRecommendTracks = async () => {
+  if (!recommendTracks) {
+    recommendTracks = await getRecommendTracks();
+  }
+  let filteredrecommendTracks;
+  recommendTracksMoreIsValid
+    ? (filteredrecommendTracks = recommendTracks)
+    : (filteredrecommendTracks = recommendTracks.slice(0, 6));
+  recommendTracksMoreIsValid = !recommendTracksMoreIsValid;
+  console.log(filteredrecommendTracks);
+  drawRecommendTracks(filteredrecommendTracks);
+};
 
-// // k-pop 더보기
-// const recommendMore = async () => {
-//     const url = new URL(
-//         `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=20`
-//     );
-//     const response = await fetch(url, {
-//         headers: {
-//             Authorization: `Bearer ${token.access_token}`,
-//         },
-//     });
-//     const data2 = await response.json();
-//     tracks = data2.tracks.items;
-//     render();
-//     folderMore = true;
-// };
-
-// // 기존 6개만 다시 보여주기(k-pop)
-// const recommendOri = async () => {
-//     const url = new URL(
-//         `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=6`
-//     );
-//     const response = await fetch(url, {
-//         headers: {
-//             Authorization: `Bearer ${token.access_token}`,
-//         },
-//     });
-
-//     const data2 = await response.json();
-//     tracks = data2.tracks.items;
-//     render();
-//     folderMore = false;
-// };
-
-// const recommendToggleMore = () => {
-//     if (folderMore) {
-//         recommendOri();
-//     } else {
-//         recommendMore();
-//     }
-//     folderMore = !folderMore;
-// };
-
-const render = () => {
-  const newAlbumHTML = albums.map((item) => {
+const drawNewReleaseAlbums = (filteredNewReleaseAlbums) => {
+  const newAlbumHTML = filteredNewReleaseAlbums.map((item) => {
     const artists = item.artists.map((artist) => artist.name).join(", ");
     return `<div class="row">
             <div class="col">
@@ -213,8 +115,10 @@ const render = () => {
   });
 
   document.getElementById("lowerBar").innerHTML = newAlbumHTML.join("");
+};
 
-  const recommendLIstHTML = tracks.map((track) => {
+const drawRecommendTracks = (drawRecommendTracks) => {
+  const recommendLIstHTML = drawRecommendTracks.map((track) => {
     const artists = track.artists.map((artist) => artist.name).join(", ");
     return `<div id="recommendLowerBa">
         <div class="row">
@@ -234,3 +138,6 @@ const render = () => {
   document.getElementById("recommendLowerBar").innerHTML =
     recommendLIstHTML.join("");
 };
+
+showNewReleaseAlbums();
+showRecommendTracks();
