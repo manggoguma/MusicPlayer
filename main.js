@@ -95,17 +95,20 @@ const displayPlaylistInfo = async () => {
     const playlistRes = await searchPlaylist();
     const playlistContainer = document.getElementById("playlist-info");
 
-    let playlistHTML = `<div class="track_info">
-        <h2>Playlist Name: ${playlistRes.name}</h2>
-        <p>Owner: ${playlistRes.owner.display_name}</p>
-        <p>Total Tracks: ${playlistRes.tracks.total}</p>
+    let playlistHTML = `<div class="track_info_box">
+        <img id="img" class="" width="264" src="https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-music-@576.png">
+        <div class="track_info">
+          <h2>Playlist Name: ${playlistRes.name}</h2>
+          <p class="top_text">Owner: ${playlistRes.owner.display_name}</p>
+          <p class="bottom_text">Total Tracks: ${playlistRes.tracks.total}</p>
+        </div>
       </div>
       <div class="row list_title">
         <div class="col-1">#</div>
         <div class="col-1"></div>
-        <div class="col-4">TITTLE</div>
-        <div class="col-1">MUSICIAN</div>
-        <div class="col-4">ALBUM</div>
+        <div class="col-3">TITTLE</div>
+        <div class="col-3">MUSICIAN</div>
+        <div class="col-3">ALBUM</div>
         <div class="col-1"><i class="fa-regular fa-clock"></i></div>
       </div>
       <ul class="track_container">
@@ -135,11 +138,11 @@ const displayPlaylistInfo = async () => {
           <div class="col-1"><img src="${albumImageUrl}" alt="Album cover for ${
         track.album.name
       }" class="album-cover"></div>
-          <div class="col-4">${track.name}</div>
-          <div class="col-1">${track.artists
+          <div class="col-3 name">${track.name}</div>
+          <div class="col-3">${track.artists
             .map((artist) => artist.name)
             .join(", ")}</div>
-          <div class="col-4">${albumRes.name}</div>
+          <div class="col-3">${albumRes.name}</div>
           <div class="col-1">${duration}</div>
         </li>
       `;

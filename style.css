@@ -86,7 +86,7 @@ button {
 .container {
   margin: 80px auto;
   max-width: 1600px;
-  height: 1000px;
+  height: 100%;
   color: white;
   display: flex;
   flex-direction: column;
@@ -117,12 +117,19 @@ button {
   flex-direction: column;
 }
 
-.track_container .track_info{margin-bottom: 50px;}
-.track_container .list_title{padding: 0 0 20px;}
-.track_container .list_title div{display: flex;justify-content: center;}
-.track_container .track_container{border-top: 1px solid;padding-top: 20px;padding-left: 0;}
-.track_container .track_music div{display: flex;justify-content: center;padding: 10px 0;}
-.track_container .album-cover{width: 70px;height: 70px;}
+.track_container .track_info_box{margin-bottom: 50px;display: flex;padding: 0 40px;}
+.track_container .track_info_box img{border-radius: 10px;}
+.track_container .track_info_box img{border-radius: 10px;}
+.track_container .track_info{padding-left: 50px;}
+.track_container .track_info h2{font-size: 50px;font-weight: 800;}
+.track_container .track_info .top_text{font-size: 28px;}
+.track_container .track_info .bottom_text{font-size: 20px;}
+.track_container .list_title{padding: 0 40px 20px 40px;}
+.track_container .list_title div{display: flex;justify-content: center;font-size: 17px;font-weight: 700;color: #B3B3B3;}
+.track_container .track_container{border-top: 1px solid #B3B3B3;padding: 20px 40px 0 40px;}
+.track_container .track_music div{display: flex;justify-content: center;padding: 10px 0;text-align: center;color: #B3B3B3;align-items: center;}
+.track_container .track_music .name{color: #fff;font-weight: 700;font-size: 18px;}
+.track_container .album-cover{width: 60px;height: 60px;}
 
 /* music-player */
 #music-player {
