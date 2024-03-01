@@ -88,8 +88,6 @@ const searchPlaylist = async (id) => {
 };
 
 // 플레이 리스트 정보 받아오는 함수 실행
-searchPlaylist();
-
 const displayPlaylistInfo = async () => {
   try {
     const playlistRes = await searchPlaylist();

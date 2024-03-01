@@ -1,3 +1,31 @@
+// 화면 리셋하기
+export const drawReset = () => {
+  let resetHTML = `
+  <div id="artist-area">
+            <!-- 아티스트 정보 -->
+            <div id="singer-top" class="singer-image-top">
+                <!-- 메인 가수 -->
+            </div>
+            <div id="singer-bottom" class="singer-image-bottom">
+                <!-- 서브 가수 -->
+            </div>
+        </div>
+        <div id="album-area">
+            <!-- 앨범 정보 -->
+        </div>
+        <div id="track-area">
+            <!-- 곡 정보 -->
+        </div>
+
+        <div class="track_container">
+            <div id="playlist-info">
+                <!-- 플레이리스트 -->
+            </div>
+        </div>
+  `;
+  document.getElementById("content").innerHTML = resetHTML;
+};
+
 // 에러 보여주기
 export const drawError = (err) => {
   let errorHTML = `
