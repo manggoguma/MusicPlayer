@@ -24,8 +24,8 @@ let spotifyUrl = `https://api.spotify.com/v1/`;
 // track: 노래
 
 // 검색용 함수
-const spotifySearch = ({ q, type }) => {
-  let url = `${spotifyUrl}search?q=${q}&type=${type}`;
+const spotifySearch = ({ q, type, limit }) => {
+  let url = `${spotifyUrl}search?q=${q}&type=${type}&limit=12`;
   return getData(url);
 };
 
