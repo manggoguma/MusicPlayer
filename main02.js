@@ -5,6 +5,7 @@ const redirect_uri = "http://localhost:5500/callback";
 
 let albums = [];
 let tracks = [];
+let folderMore = false;
 
 // 토큰 요청
 const getToken = async () => {
@@ -71,8 +72,7 @@ const getNewAlbum = async () => {
     render();
 };
 
-// 더보기 함수
-let folderMore = false;
+// 더보기 함수(최신)
 
 const openMore = async () => {
     const url = new URL(
@@ -89,7 +89,7 @@ const openMore = async () => {
     folderMore = true;
 };
 
-// 기존 6개만 다시 보여주기
+// 기존 6개만 다시 보여주기(최신)
 const returnOri = async () => {
     const url = new URL(
         `https://api.spotify.com/v1/browse/new-releases?country=KR&limit=6`
@@ -114,7 +114,7 @@ const toggleMore = () => {
     folderMore = !folderMore;
 };
 
-let spoty_kr_category = `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=20`;
+let spoty_kr_category = `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=6`;
 
 // K-pop 플레이리스트 가져오기
 const getRecommend = async () => {
@@ -144,26 +144,24 @@ getToken().then(() => {
     getRecommend();
 });
 
-// // 더보기 함수
-// let folderMore02 = false;
+// k-pop 더보기
+const recommendMore = async () => {
+    const url = new URL(
+        `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=20`
+    );
+    const response = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${token.access_token}`,
+        },
+    });
+    const data2 = await response.json();
+    tracks = data2.tracks.items;
+    render();
+    folderMore = true;
+};
 
-// const openMore02 = async () => {
-//     const url = new URL(
-//         `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=20`
-//     );
-//     const response = await fetch(url, {
-//         headers: {
-//             Authorization: `Bearer ${token.access_token}`,
-//         },
-//     });
-//     const data2 = await response.json();
-//     tracks = data2.tracks.items; // 수정: tracks 배열 업데이트
-//     render();
-//     folderMore02 = true;
-// };
-
-// // 기존 6개만 다시 보여주기
-// const returnOri02 = async () => {
+// // 기존 6개만 다시 보여주기(k-pop)
+// const recommendOri = async () => {
 //     const url = new URL(
 //         `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=6`
 //     );
@@ -174,21 +172,19 @@ getToken().then(() => {
 //     });
 
 //     const data2 = await response.json();
-//     tracks = data2.tracks.items; // 수정: tracks 배열 업데이트
+//     tracks = data2.tracks.items;
 //     render();
-//     folderMore02 = false;
+//     folderMore = false;
 // };
 
-// const toggleMore02 = () => {
-//     if (folderMore02) {
-//         returnOri02();
+// const recommendToggleMore = () => {
+//     if (folderMore) {
+//         recommendOri();
 //     } else {
-//         openMore02();
+//         recommendMore();
 //     }
-//     folderMore02 = !folderMore02;
+//     folderMore = !folderMore;
 // };
-
-
 
 
 const render = () => {
@@ -211,8 +207,8 @@ const render = () => {
 
     const recommendLIstHTML = tracks.map((track) => {
         const artists = track.artists.map((artist) => artist.name).join(", ");
-        return `<div id="lowerBar02">
-        <div class="row02">
+        return `<div id="recommendLowerBa">
+        <div class="row">
             <div class="col">
                 <div class="col-lg-8">
                     <img class="album-img-size" src=${track.album.images[0].url} alt="">
@@ -228,8 +224,6 @@ const render = () => {
 
     document.getElementById("recommendLowerBar").innerHTML = recommendLIstHTML.join("");
 };
-
-
 
 
 
