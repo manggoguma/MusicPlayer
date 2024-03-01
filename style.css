@@ -117,15 +117,22 @@ button {
   flex-direction: column;
 }
 
-.track_container .track_info_box{margin-bottom: 50px;display: flex;padding: 0 40px;}
-.track_container .track_info_box img{border-radius: 10px;}
-.track_container .track_info_box img{border-radius: 10px;}
-.track_container .track_info{padding-left: 50px;}
-.track_container .track_info h2{font-size: 50px;font-weight: 800;}
-.track_container .track_info .top_text{font-size: 28px;}
-.track_container .track_info .bottom_text{font-size: 20px;}
+/* 트랙리스트 css */
+.track_info_box{margin: 50px 0;display: flex;padding: 0 40px;}
+.track_info_box img{border-radius: 10px;}
+.track_info_box .track_info{padding-left: 50px;}
+.track_info h2{font-size: 50px;font-weight: 800;}
+.track_info .top_text{font-size: 22px;color: rgba(255,255,255,0.7);}
+.track_info .bottom_text{font-size: 16px;font-weight: 400;color: rgba(255,255,255,0.7);margin-bottom: 25px;}
+.track_info .down_icon{border: 1px solid rgba(255,255,255,0.3);;border-radius: 25px;padding: 8px 20px;font-size: 15px;color: rgba(255,255,255,0.7);margin-right: 20px;}
+.track_info .down_icon:hover,.track_info .down_icon:focus,.track_info .down_icon:active{background-color: rgba(135, 135, 135,0.4);}
+.track_info .fa-square-plus{padding-right: 10px;}
+.track_info .heart-btn{font-size: 23px;}
+
+
 .track_container .list_title{padding: 0 40px 20px 40px;}
 .track_container .list_title div{display: flex;justify-content: center;font-size: 17px;font-weight: 700;color: #B3B3B3;}
+
 .track_container .track_container{border-top: 1px solid #B3B3B3;padding: 20px 40px 0 40px;}
 .track_container .track_music div{display: flex;justify-content: center;padding: 10px 0;text-align: center;color: #B3B3B3;align-items: center;}
 .track_container .track_music .name{color: #fff;font-weight: 700;font-size: 18px;}
@@ -175,8 +182,8 @@ button {
   align-items: center;
 }
 
-.music-info .heart-btn:hover,
-.music-info .heart-btn:active,
+.heart-btn:hover,
+.heart-btn:active,
 .heart-btn:focus {
   color: #ff4242;
 }
