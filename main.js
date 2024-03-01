@@ -8,11 +8,15 @@ import {
 import { resDataCheck, qCheck } from "./modules/checks.js";
 
 // 엔터키 기능 추가
-document.getElementById("search-input").addEventListener("keypress", (e) => {
+const inputarea = document.getElementById("search-input");
+inputarea.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     search();
   }
+});
+inputarea.addEventListener("focus", () => {
+  inputarea.value = "";
 });
 
 let spotifyUrl = `https://api.spotify.com/v1/`;
@@ -33,6 +37,10 @@ const spotifySearch = ({ q, type }) => {
 window.search = async (q) => {
   try {
     q = qCheck(q);
+    // 빈문자 검색 체크
+    if (q.trim() === "") {
+      return;
+    }
     let artistRes = await spotifySearch({ q, type: "artist" });
     let albumRes = await spotifySearch({ q, type: "album" });
     let trackRes = await spotifySearch({ q, type: "track" });
