@@ -144,21 +144,21 @@ getToken().then(() => {
     getRecommend();
 });
 
-// k-pop 더보기
-const recommendMore = async () => {
-    const url = new URL(
-        `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=20`
-    );
-    const response = await fetch(url, {
-        headers: {
-            Authorization: `Bearer ${token.access_token}`,
-        },
-    });
-    const data2 = await response.json();
-    tracks = data2.tracks.items;
-    render();
-    folderMore = true;
-};
+// // k-pop 더보기
+// const recommendMore = async () => {
+//     const url = new URL(
+//         `https://api.spotify.com/v1/recommendations?market=KR&seed_genres=k-pop&limit=20`
+//     );
+//     const response = await fetch(url, {
+//         headers: {
+//             Authorization: `Bearer ${token.access_token}`,
+//         },
+//     });
+//     const data2 = await response.json();
+//     tracks = data2.tracks.items;
+//     render();
+//     folderMore = true;
+// };
 
 // // 기존 6개만 다시 보여주기(k-pop)
 // const recommendOri = async () => {
