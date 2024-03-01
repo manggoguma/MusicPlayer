@@ -31,17 +31,15 @@ const spotifySearch = ({ q, type }) => {
 // 검색 기능
 window.search = async (q) => {
   try {
-    if (qCheck(q) === false) {
+    q = qCheck(q);
+
+    if (q === false) {
       return;
     }
-    q = qCheck(q);
+
     let artistRes = await spotifySearch({ q, type: "artist" });
     let albumRes = await spotifySearch({ q, type: "album" });
     let trackRes = await spotifySearch({ q, type: "track" });
-
-    console.log("artist", artistRes);
-    console.log("album", albumRes);
-    console.log("track", trackRes);
 
     if (resDataCheck({ artistRes, albumRes, trackRes })) {
       drawError("검색 결과가 없습니다.");
@@ -58,17 +56,13 @@ window.search = async (q) => {
   }
 };
 
-// 검색 결과 앨범 눌렀을 때 앨범 데이터 받아오는 거 까지
-window.searchAlbum = async (id) => {
-  let spotifyAlbumUrl = `${spotifyUrl}albums/${id}?market=KR`;
-  let albumRes = await getData(spotifyAlbumUrl);
-  console.log(albumRes);
-};
-
-// 플레이리스트 id 받아서 정보받아오는거까지 (일단 임의의 playlist id 사용함)
+// 플레이리스트 검색 기능
 window.searchPlaylist = async (id) => {
   try {
     id = "37i9dQZF1DWT9uTRZAYj0c";
+    if (!id) {
+      return;
+    }
     let spotifyPlaylistUrl = `${spotifyUrl}playlists/${id}?market=KR`;
     let playlistRes = await getData(spotifyPlaylistUrl);
     // console.log(playlistRes);
@@ -110,12 +104,13 @@ const drawPlayListDetail = (playlistRes) => {
     <ul class="track_container">
   `;
 
-  const trackData = playlistRes.tracks.items;
-  trackData.forEach((data, index) => {
-    const trackDatas = {
+  const albumData = playlistRes.tracks.items;
+  albumData.forEach((data, index) => {
+    const albumDatas = {
       // 앨범 정보
       albumImageURL: data.track.album.images[0].url,
       albumName: data.track.album.name,
+      albumId: data.track.album.id,
       // 재생 시간
       duration: duration(data.track.duration_ms),
     };
@@ -123,14 +118,18 @@ const drawPlayListDetail = (playlistRes) => {
   <li class="row track_music">
     <div class="col-1">${index + 1}</div>
     <div class="col-1"><img src="${
-      trackDatas.albumImageURL
-    }" alt="Album cover for ${trackDatas.albumName}" class="album-cover"></div>
+      albumDatas.albumImageURL
+    }" alt="Album cover for ${
+      albumDatas.albumName
+    }" class="album-cover" onclick="searchAlbum('${albumDatas.albumId}')"></div>
     <div class="col-3 name">${data.track.name}</div>
     <div class="col-3">${data.track.artists
       .map((artist) => artist.name)
       .join(", ")}</div>
-    <div class="col-3">${trackDatas.albumName}</div>
-    <div class="col-1">${trackDatas.duration}</div>
+    <div class="col-3" onclick="searchAlbum('${albumDatas.albumId}')">${
+      albumDatas.albumName
+    } </div>
+    <div class="col-1">${albumDatas.duration}</div>
   </li>
 `;
   });
@@ -174,3 +173,26 @@ const drawPlayListDetail = (playlistRes) => {
 };
 
 searchPlaylist();
+
+// 앨범 검색 기능
+window.searchAlbum = async (id) => {
+  try {
+    if (!id) {
+      return;
+    }
+    let spotifyAlbumUrl = `${spotifyUrl}albums/${id}?market=KR`;
+    let albumRes = await getData(spotifyAlbumUrl);
+    console.log(albumRes);
+    drawAlbumDetail(albumRes);
+  } catch (err) {
+    console.error(err);
+    drawError(err);
+  }
+};
+
+const drawAlbumDetail = (albumRes) => {
+  const trackData = albumRes.tracks.items;
+  trackData.forEach((data, index) => {
+    console.log(index + 1, data.name);
+  });
+};
