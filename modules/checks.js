@@ -1,5 +1,6 @@
 export const qCheck = (q) => {
-  return q ? q : (q = document.getElementById("search-input").value);
+  q ? q : (q = document.getElementById("search-input").value);
+  return q.trim() !== "" ? q : false;
 };
 
 export const resDataCheck = ({ artistRes, albumRes, trackRes }) => {
