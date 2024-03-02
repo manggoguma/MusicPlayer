@@ -180,7 +180,7 @@ window.showNewReleaseAlbums = async () => {
     ? (filteredNewReleaseAlbums = newReleaseAlbums)
     : (filteredNewReleaseAlbums = newReleaseAlbums.slice(0, 6));
   newReleaseAlbumsMoreIsValid = !newReleaseAlbumsMoreIsValid;
-  console.log(filteredNewReleaseAlbums);
+  // console.log(filteredNewReleaseAlbums);
   drawNewReleaseAlbums(filteredNewReleaseAlbums);
 };
 
