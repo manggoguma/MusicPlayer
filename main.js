@@ -66,7 +66,6 @@ window.search = async (q) => {
 // 플레이리스트 검색 기능
 window.searchPlaylist = async (id) => {
   try {
-    id = "37i9dQZF1DWT9uTRZAYj0c";
     if (!id) {
       return;
     }
@@ -264,17 +263,17 @@ const getRecommendPlaylist = async () => {
 
 const drawRecommendPlaylist = (spotipyKpopPlayListRes) => {
   let kpopPlayList = spotipyKpopPlayListRes.playlists.items;
-  console.log("여기요", kpopPlayList);
+  let filteredKpopPlayList = kpopPlayList.splice(0, 6);
+  // console.log("여기요", filteredKpopPlayList);
 
-  const recommendPlaylistHTML = kpopPlayList.map((items) => {
-    const name = items.name.map((artists) => artists.name).join(", ");
+  const recommendPlaylistHTML = filteredKpopPlayList.map((items) => {
     return `<div class="row">
     <div class="col">
     <div class="col-lg-8">
-    <img class="album-img-size" src=${items.images[0].url} alt="">
+    <img class="album-img-size" src=${items.images[0].url} alt="${items.name}" onclick="searchPlaylist('${items.id}')">
     </div>
     <div class="col-lg-4">
-    <p>${name}</p>
+    <h5>${items.name}</h5>
     </div>
     </div>
     </div>`;
