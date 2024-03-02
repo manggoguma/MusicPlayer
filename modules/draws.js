@@ -19,16 +19,24 @@ export const drawSearch = () => {
             <div id="singer-top" class="singer-image-top">
                 <!-- 메인 가수 -->
             </div>
-            <h3>관련아티스트</h3>
-            <div id="singer-bottom" class="singer-image-bottom">
-                <!-- 서브 가수 -->
-            </div>
+            <div class="sub_area">
+              <h3>관련있는 아티스트</h3>
+              <div id="singer-bottom" class="singer-image-bottom">
+                  <!-- 서브 가수 -->
+              </div>
+            </div>              
         </div>
-        <div id="album-area">
-            <!-- 앨범 정보 -->
-        </div>
-        <div id="track-area">
-            <!-- 곡 정보 -->
+        <div class="album_box">
+          <h3>앨범</h3>
+          <div id="album-area">
+              <!-- 앨범 정보 -->
+          </div>
+        </div>       
+        <div class="track_box">
+        <h3>노래</h3>
+          <div id="track-area">
+              <!-- 곡 정보 -->
+          </div>
         </div>`;
   document.getElementById("content").innerHTML = searchHTML;
 };

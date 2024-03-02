@@ -116,19 +116,13 @@ button {
   font-weight: 900;
 }
 
-#lowerBar .row,#recommendLowerBar .row,#recommendListLowerBar .row {
+#lowerBar .row,#recommendLowerBar .row,#recommendListLowerBar .row,.recommendRow {
   display: inline-block;
   float: left;
   margin-left: 2em;
   margin-top: 1em;
 }
 
-.recommendRow {
-  display: inline-block;
-  float: left;
-  margin-left: 2em;
-  margin-top: 1em;
-}
 
 .col {
   height: 250px;
@@ -213,12 +207,11 @@ button {
 
 #artist-area{
   display: flex;
+  justify-content:space-around;
   margin: 30px 0 50px;
   padding: 0 60px;
 }
-#artist-area .singer-image-top{
-  margin-right: 240px;
-}
+
 .singer-image-top img{
   width: 240px;
   border-radius: 170px;
@@ -228,22 +221,39 @@ button {
   font-weight: 600;
   margin-left: 20px;
 }
+#artist-area .sub_area{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#artist-area .sub_area h3{
+  font-size: 30px;
+  font-weight: 700;
+}
 .singer-image-bottom .linked_artist{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-right: 30px;
+  padding-right: 50px;
+}
+.singer-image-bottom .linked_artist span{
+  font-size: 18px;
+  padding-top: 10px;
 }
 .singer-image-bottom .linked_img img{
   width: 130px;
   border-radius: 110px;
 }
-
+.album_box{padding: 0 60px 100px;}
+.album_box h3{
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
 #album-area {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 60px;
 }
 #album-area .album-container {
   display: flex;
@@ -257,9 +267,14 @@ button {
 .album-container img:hover {
   cursor: pointer;
 }
-#track-area {
-  margin: 20px 60px;
+
+.track_box{padding: 0 60px 60px;}
+.track_box h3{
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
+
 .track-container{
   display: flex;
   align-items: center;
