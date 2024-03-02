@@ -2,6 +2,8 @@ import { keys } from "../keys.js";
 import { drawReset } from "./draws.js";
 let { client_id, client_secret } = keys;
 
+let spotifyURL = `https://api.spotify.com/v1/`;
+
 // 토큰 요청
 const getToken = async ({ client_id, client_secret }) => {
   const authOptions = {
@@ -52,4 +54,10 @@ export const getData = async (url) => {
       console.error("Error:", error);
     }
   }
+};
+
+// 검색용 함수
+export const spotifySearch = ({ q, type }) => {
+  let url = `${spotifyURL}search?q=${q}&type=${type}&limit=6`;
+  return getData(url);
 };
