@@ -8,8 +8,6 @@ import {
 import { resDataCheck, qCheck } from "./modules/checks.js";
 import { duration } from "./modules/duration.js";
 
-// test
-
 // 엔터키 기능 추가
 const inputarea = document.getElementById("search-input");
 inputarea.addEventListener("keypress", (e) => {
@@ -21,11 +19,6 @@ inputarea.addEventListener("keypress", (e) => {
 inputarea.addEventListener("focus", () => {
   inputarea.value = "";
 });
-
-let token;
-const client_id = "027d68ef08f84e8ebbf9e24aa91a52b5";
-const client_secret = "6c38e73980514a03bc9b3be8da228ca5";
-const redirect_uri = "http://localhost:5500/callback";
 
 let newReleaseAlbums;
 let recommendTracks;
@@ -253,8 +246,8 @@ const drawRecommendTracks = (drawRecommendTracks) => {
     recommendLIstHTML.join("");
 };
 
-showNewReleaseAlbums();
-showRecommendTracks();
+// showNewReleaseAlbums();
+// showRecommendTracks();
 
 // const genresData = getData(
 //   "https://api.spotify.com/v1/browse/categories?locale=sv_US"
