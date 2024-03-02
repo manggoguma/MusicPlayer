@@ -41,6 +41,11 @@ window.search = async (q) => {
     let albumRes = await spotifySearch({ q, type: "album" });
     let trackRes = await spotifySearch({ q, type: "track" });
 
+<<<<<<< HEAD
+=======
+    console.log(artistRes);
+
+>>>>>>> cb9d348b9c424e90f3198f2bdcd2c80f0b258b48
     if (resDataCheck({ artistRes, albumRes, trackRes })) {
       drawError("검색 결과가 없습니다.");
       return;
@@ -129,9 +134,15 @@ const drawPlayListDetail = (playlistRes) => {
     <div class="col-3">${data.track.artists
       .map((artist) => artist.name)
       .join(", ")}</div>
+<<<<<<< HEAD
     <div class="col-lg-3 col-sm-4 album" onclick="searchAlbum('${albumDatas.albumId}')">${
       albumDatas.albumName
     } </div>
+=======
+    <div class="col-lg-3 col-sm-4 album" onclick="searchAlbum('${
+      albumDatas.albumId
+    }')">${albumDatas.albumName} </div>
+>>>>>>> cb9d348b9c424e90f3198f2bdcd2c80f0b258b48
     <div class="col-lg-1 timer">${albumDatas.duration}</div>
   </li>
 `;
@@ -175,7 +186,11 @@ const drawPlayListDetail = (playlistRes) => {
   playlistContainer.innerHTML = playlistHTML;
 };
 
+<<<<<<< HEAD
 //searchPlaylist();
+=======
+searchPlaylist();
+>>>>>>> cb9d348b9c424e90f3198f2bdcd2c80f0b258b48
 
 // 앨범 검색 기능
 window.searchAlbum = async (id) => {
@@ -199,6 +214,7 @@ const drawAlbumDetail = (albumRes) => {
     console.log(index + 1, data.name);
   });
 };
+<<<<<<< HEAD
 
 // 최신앨범 가져오기
 const getNewReleaseAlbums = async () => {
@@ -332,3 +348,5 @@ const getKoeanMusic = async () => {
 
 
 getKoeanMusic();
+=======
+>>>>>>> cb9d348b9c424e90f3198f2bdcd2c80f0b258b48
