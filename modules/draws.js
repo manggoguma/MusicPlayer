@@ -1,13 +1,26 @@
 import { duration } from "./duration.js";
 
 // 화면 리셋하기
-export const drawReset = () => {
-  let resetHTML = `
+export const drawPlayList = () => {
+  let playListHTML = `
+  <div class="track_container">
+            <div id="playlist-info">
+                <!-- 플레이리스트 -->
+            </div>
+        </div>
+    </div>
+  `;
+  document.getElementById("content").innerHTML = playListHTML;
+};
+
+export const drawSearch = () => {
+  let searchHTML = `
   <div id="artist-area">
             <!-- 아티스트 정보 -->
             <div id="singer-top" class="singer-image-top">
                 <!-- 메인 가수 -->
             </div>
+            <h3>관련아티스트</h3>
             <div id="singer-bottom" class="singer-image-bottom">
                 <!-- 서브 가수 -->
             </div>
@@ -17,15 +30,8 @@ export const drawReset = () => {
         </div>
         <div id="track-area">
             <!-- 곡 정보 -->
-        </div>
-
-        <div class="track_container">
-            <div id="playlist-info">
-                <!-- 플레이리스트 -->
-            </div>
-        </div>
-  `;
-  document.getElementById("content").innerHTML = resetHTML;
+        </div>`;
+  document.getElementById("content").innerHTML = searchHTML;
 };
 
 // 에러 보여주기

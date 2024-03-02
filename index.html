@@ -35,6 +35,7 @@
 
     <!--main content-->
     <div id="content" class="container">
+
         <section id="newAlbum">
             <div class="upperBar">
                 <div class="titleSpace">
@@ -119,74 +120,57 @@
 
 
 
-        </section>
 
-        <div id="artist-area">
-            <!-- 아티스트 정보 -->
-            <div id="singer-top" class="singer-image-top">
-                <!-- 메인 가수 -->
-            </div>
-            <h3>관련아티스트</h3>
-            <div id="singer-bottom" class="singer-image-bottom">
-                <!-- 서브 가수 -->
-            </div>
-        </div>
-        <div id="album-area">
-            <!-- 앨범 정보 -->
-        </div>
-        <div id="track-area">
-            <!-- 곡 정보 -->
-        </div>
 
-        <div class="track_container">
-            <div id="playlist-info">
-                <!-- 플레이리스트 -->
-            </div>
-        </div>
-    </div>
-    <!--// main content-->
 
-    <!--music player-->
-    <footer id="music-player">
-        <div class="music-info">
-            <div class="thumb">
-                <img src="image/thumb_01.jpg" alt="cover" id="cover">
+
+
+        <!--// main content-->
+
+        <!--music player-->
+        <footer id="music-player">
+            <div class="music-info">
+                <div class="thumb">
+                    <img src="image/thumb_01.jpg" alt="cover" id="cover">
+                </div>
+                <div class="music-text">
+                    <h3 class="music-title">L’Amour, Les Baguettes, Paris</h3>
+                    <p class="music_artist">스텔라장(Stella Jang)</p>
+                </div>
+                <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
             </div>
-            <div class="music-text">
-                <h3 class="music-title">L’Amour, Les Baguettes, Paris</h3>
-                <p class="music_artist">스텔라장(Stella Jang)</p>
+            <div class="play-control" id="musicContainer">
+                <div class="navigation">
+                    <button id="random" class="action-btn" onclick=""><i class="fa-solid fa-shuffle"></i></button>
+                    <button id="prev" class="action-btn" onclick=""><i
+                            class="fa-sharp fa-solid fa-backward"></i></button>
+                    <button id="playBtn" class="actiong-btn big" onclick=""><i class="fa-solid fa-play"></i></button>
+                    <button id="pauseBtn" class="actiong-btn big none" onclick=""><i
+                            class="fa-solid fa-pause"></i></button>
+                    <button id="next" class="actiong-btn" onclick=""><i
+                            class="fa-sharp fa-solid fa-forward"></i></button>
+                    <button id="rotate" class="action-btn" onclick=""><i class="fa-solid fa-rotate"></i></button>
+                </div>
+                <div class="progress-container" id="play-control">
+                    <div class="progress" id="progress"></div>
+                </div>
             </div>
-            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
-        </div>
-        <div class="play-control" id="musicContainer">
-            <div class="navigation">
-                <button id="random" class="action-btn" onclick=""><i class="fa-solid fa-shuffle"></i></button>
-                <button id="prev" class="action-btn" onclick=""><i class="fa-sharp fa-solid fa-backward"></i></button>
-                <button id="playBtn" class="actiong-btn big" onclick=""><i class="fa-solid fa-play"></i></button>
-                <button id="pauseBtn" class="actiong-btn big none" onclick=""><i class="fa-solid fa-pause"></i></button>
-                <button id="next" class="actiong-btn" onclick=""><i class="fa-sharp fa-solid fa-forward"></i></button>
-                <button id="rotate" class="action-btn" onclick=""><i class="fa-solid fa-rotate"></i></button>
+            <div class="ect-bar">
+                <button class="voice"><i class="fa-solid fa-microphone"></i></button>
+                <button class="list"><i class="fa-solid fa-list"></i></button>
+                <div class="progress-container" id="volume-control">
+                    <button><i class="fa-solid fa-volume-high"></i></button>
+                    <div class="progress" id="progress"></div>
+                </div>
             </div>
-            <div class="progress-container" id="play-control">
-                <div class="progress" id="progress"></div>
-            </div>
-        </div>
-        <div class="ect-bar">
-            <button class="voice"><i class="fa-solid fa-microphone"></i></button>
-            <button class="list"><i class="fa-solid fa-list"></i></button>
-            <div class="progress-container" id="volume-control">
-                <button><i class="fa-solid fa-volume-high"></i></button>
-                <div class="progress" id="progress"></div>
-            </div>
-        </div>
-    </footer>
-    <!--// music player-->
-    <script src="https://kit.fontawesome.com/97aea18dfc.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script type="module" src="./main.js"></script>
+        </footer>
+        <!--// music player-->
+        <script src="https://kit.fontawesome.com/97aea18dfc.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+        <script type="module" src="./main.js"></script>
 </body>
 
 </html><!-- HTML !-->

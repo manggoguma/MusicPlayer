@@ -1,6 +1,8 @@
 import { resDataCheck, qCheck } from "./modules/checks.js";
 import {
   drawError,
+  drawSearch,
+  drawPlayList,
   drawArtist,
   drawAlbum,
   drawTrack,
@@ -45,7 +47,7 @@ window.search = async (q) => {
     let trackRes = await spotifySearch({ q, type: "track" });
 
     console.log(trackRes);
-
+    drawSearch();
     if (resDataCheck({ artistRes, albumRes, trackRes })) {
       drawError("검색 결과가 없습니다.");
       return;
@@ -124,6 +126,11 @@ window.searchPlaylist = async (id) => {
     }
     let spotifyPlaylistURL = `https://api.spotify.com/v1/playlists/${id}?market=KR`;
     let playlistRes = await getData(spotifyPlaylistURL);
+    drawPlayList();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
     drawPlayListDetail(playlistRes);
   } catch (err) {
     console.error(err);

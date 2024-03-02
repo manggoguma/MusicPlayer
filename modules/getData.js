@@ -1,5 +1,4 @@
 import { keys } from "../keys.js";
-import { drawReset } from "./draws.js";
 let { client_id, client_secret } = keys;
 
 let spotifyURL = `https://api.spotify.com/v1/`;
@@ -37,7 +36,6 @@ export const getData = async (url) => {
     token = await getToken({ client_id, client_secret });
   }
   try {
-    // drawReset();
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token.access_token}`,
