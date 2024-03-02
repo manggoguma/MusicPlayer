@@ -8,6 +8,8 @@ import {
 import { resDataCheck, qCheck } from "./modules/checks.js";
 import { duration } from "./modules/duration.js";
 
+// test
+
 // 엔터키 기능 추가
 const inputarea = document.getElementById("search-input");
 inputarea.addEventListener("keypress", (e) => {
