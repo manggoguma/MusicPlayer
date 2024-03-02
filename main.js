@@ -251,7 +251,7 @@ showRecommendTracks();
 
 // K-pop 플레이리스트 가져오기
 const getRecommendPlaylist = async () => {
-  let spotipyKpopPlayListURL = `https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFQtzIMjOW2bE/playlists&limit=6`;
+  let spotipyKpopPlayListURL = `https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFQtzIMjOW2bE/playlists`;
   const spotipyKpopPlayListRes = await getData(spotipyKpopPlayListURL);
   // console.log(spotipyKpopPlayListRes);
   drawRecommendPlaylist(spotipyKpopPlayListRes);
@@ -267,15 +267,14 @@ const drawRecommendPlaylist = (spotipyKpopPlayListRes) => {
   console.log("여기요", kpopPlayList);
 
   const recommendPlaylistHTML = kpopPlayList.map((items) => {
-    const artists = items.artists.map((artists) => artists.name).join(", ");
+    
     return `<div class="row">
     <div class="col">
     <div class="col-lg-8">
     <img class="album-img-size" src=${items.images[0].url} alt="">
     </div>
     <div class="col-lg-4">
-    <h5>${items.name}</h5>
-    <p>${artists}</p>
+    <p>${items.description}</p>
     </div>
     </div>
     </div>`;
