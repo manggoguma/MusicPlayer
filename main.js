@@ -184,7 +184,7 @@ window.showNewReleaseAlbums = async () => {
   drawNewReleaseAlbums(filteredNewReleaseAlbums);
 };
 
-// K-pop 플레이리스트 가져오기
+// K-pop 노래 가져오기
 const getRecommendTracks = async () => {
   let spotipyKpopCategoryURL = `https://api.spotify.com/v1/recommendations?seed_genres=k-pop`;
   const getRecommendTracksRes = await getData(spotipyKpopCategoryURL);
@@ -249,54 +249,17 @@ const drawRecommendTracks = (drawRecommendTracks) => {
 // showNewReleaseAlbums();
 // showRecommendTracks();
 
-// const genresData = getData(
-//   "https://api.spotify.com/v1/browse/categories?locale=sv_US"
-// );
-// console.log("장르", genresData);
-// let limit = 10;
-// let genreId = "0JQ5DAqbMKFQtzIMjOW2bE"; //코리아 뮤직
-// let playlistsData = getData(
-//   `https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`
-// );
-// console.log("플레이리스트", playlistsData);
+// K-pop 플레이리스트 가져오기
+const getRecommendPlaylist = async () => {
+  let spotipyKpopPlayListURL = `https://api.spotify.com/v1/browse/categories/0JQ5DAqbMKFQtzIMjOW2bE/playlists`;
+  const spotipyKpopPlayListRes = await getData(spotipyKpopPlayListURL);
+  // console.log(spotipyKpopPlayListRes);
+  drawRecommendPlaylist(spotipyKpopPlayListRes);
+};
 
-// //국내 최신곡 https://api.spotify.com/v1/playlists/37i9dQZF1DXe5W6diBL5N4
-// let koreaLatestMusic = getData(
-//   `https://api.spotify.com/v1/playlists/37i9dQZF1DXe5W6diBL5N4?limit=${limit}`
-// );
-// console.log("국내최신가요1", koreaLatestMusic);
+const drawRecommendPlaylist = (spotipyKpopPlayListRes) => {
+  let kpopPlayList = spotipyKpopPlayListRes.playlists.items;
+  console.log(kpopPlayList);
+};
 
-// // 코리안 뮤직 플레이리스트 가져오기
-// const getKoeanMusic = async () => {
-//   // 토큰이 없을 경우 token 요청
-//   if (!token) {
-//     await getToken();
-//   }
-//   url = new URL(`https://api.spotify.com/v1/playlists/37i9dQZF1DXe5W6diBL5N4`);
-//   try {
-//     const response = await fetch(url, {
-//       headers: {
-//         Authorization: `Bearer ${token.access_token}`,
-//       },
-//     });
-//     const data = await response.json();
-//     const albums = data.tracks.items; //[0].track.album.images[2]
-//     const tracks = data.tracks.items;
-//     console.log("국내최신가요", albums);
-//     tracks.forEach((track) => {
-//       console.log("음악 이름:", track.track.name);
-//     });
-//     return data;
-//     render();
-//   } catch (error) {
-//     // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행 getData는 필요에 맞춰 변경해야할듯
-//     if (error.status === 401) {
-//       await getToken();
-//       return getData();
-//     } else {
-//       console.error("Error:", error);
-//     }
-//   }
-// };
-
-// // getKoeanMusic();
+getRecommendPlaylist();
