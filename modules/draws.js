@@ -1,3 +1,5 @@
+import { duration } from "./duration.js";
+
 // 화면 리셋하기
 export const drawReset = () => {
   let resetHTML = `
@@ -122,7 +124,10 @@ export const drawTrack = ({ tracks }) => {
           : data.album.images[0].url,
       trackName: data.name,
       artistName: data.artists[0].name,
+      albumName: data.album.name,
+      duration: duration(data.duration_ms),
     };
+    console.log(trackObj.albumName, trackObj.duration);
     trackHTML += `
           <div class="track-container">
             <div class="col-4">

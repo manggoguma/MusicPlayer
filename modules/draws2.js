@@ -32,11 +32,16 @@ export const drawPlayListDetail = (playlistRes) => {
   albumData.forEach((data, index) => {
     const albumDatas = {
       // 앨범 정보
-      albumImageURL: data.track.album.images[0].url,
-      albumName: data.track.album.name,
-      albumId: data.track.album.id,
+      albumImageURL:
+        data?.track?.album?.images[0].url ??
+        "https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-music-@576.png",
+      albumName: data?.track?.album?.name ?? "-",
+      albumId: data?.track?.album?.id ?? "-",
       // 재생 시간
-      duration: duration(data.track.duration_ms),
+      duration:
+        duration(data?.track?.duration_ms) == `NaN:NaN`
+          ? "-"
+          : duration(data?.track?.duration_ms),
     };
     playlistHTML += `
     <li class="row track_music">
@@ -46,10 +51,10 @@ export const drawPlayListDetail = (playlistRes) => {
       }" alt="Album cover for ${
       albumDatas.albumName
     }" class="album-cover" onclick="searchAlbum('${albumDatas.albumId}')"></div>
-      <div class="col-3 name">${data.track.name}</div>
-      <div class="col-3">${data.track.artists
-        .map((artist) => artist.name)
-        .join(", ")}</div>
+      <div class="col-3 name">${data?.track?.name ?? "-"}</div>
+      <div class="col-3">${
+        data?.track?.artists.map((artist) => artist.name).join(", ") ?? "-"
+      }</div>
       <div class="col-lg-3 col-sm-4 album" onclick="searchAlbum('${
         albumDatas.albumId
       }')">${albumDatas.albumName} </div>

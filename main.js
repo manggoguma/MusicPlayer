@@ -44,6 +44,8 @@ window.search = async (q) => {
     let albumRes = await spotifySearch({ q, type: "album" });
     let trackRes = await spotifySearch({ q, type: "track" });
 
+    console.log(trackRes);
+
     if (resDataCheck({ artistRes, albumRes, trackRes })) {
       drawError("검색 결과가 없습니다.");
       return;
