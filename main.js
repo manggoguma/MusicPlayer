@@ -175,7 +175,7 @@ const drawPlayListDetail = (playlistRes) => {
   playlistContainer.innerHTML = playlistHTML;
 };
 
-searchPlaylist();
+//searchPlaylist();
 
 // 앨범 검색 기능
 window.searchAlbum = async (id) => {
@@ -199,3 +199,136 @@ const drawAlbumDetail = (albumRes) => {
     console.log(index + 1, data.name);
   });
 };
+
+// 최신앨범 가져오기
+const getNewReleaseAlbums = async () => {
+  let getNewReleaseAlbumsURL = `${spoty_url}browse/new-releases?country=KR&limit=20`;
+  const newReleaseAlbumsRes = await getData(getNewReleaseAlbumsURL);
+  console.log("newReleaseAlbumsRes", newReleaseAlbumsRes);
+  return newReleaseAlbumsRes.albums.items;
+};
+
+window.showNewReleaseAlbums = async () => {
+  if (!newReleaseAlbums) {
+    newReleaseAlbums = await getNewReleaseAlbums();
+  }
+  let filteredNewReleaseAlbums;
+  newReleaseAlbumsMoreIsValid
+    ? (filteredNewReleaseAlbums = newReleaseAlbums)
+    : (filteredNewReleaseAlbums = newReleaseAlbums.slice(0, 6));
+  newReleaseAlbumsMoreIsValid = !newReleaseAlbumsMoreIsValid;
+  console.log(filteredNewReleaseAlbums);
+  drawNewReleaseAlbums(filteredNewReleaseAlbums);
+};
+
+// K-pop 플레이리스트 가져오기
+const getRecommendTracks = async () => {
+  let spotipyKpopCategoryURL = `https://api.spotify.com/v1/recommendations?seed_genres=k-pop`;
+  const getRecommendTracksRes = await getData(spotipyKpopCategoryURL);
+  console.log("getRecommendRes", getRecommendTracksRes);
+  return getRecommendTracksRes.tracks;
+};
+
+window.showRecommendTracks = async () => {
+  if (!recommendTracks) {
+    recommendTracks = await getRecommendTracks();
+  }
+  let filteredrecommendTracks;
+  recommendTracksMoreIsValid
+    ? (filteredrecommendTracks = recommendTracks)
+    : (filteredrecommendTracks = recommendTracks.slice(0, 6));
+  recommendTracksMoreIsValid = !recommendTracksMoreIsValid;
+  console.log(filteredrecommendTracks);
+  drawRecommendTracks(filteredrecommendTracks);
+};
+
+const drawNewReleaseAlbums = (filteredNewReleaseAlbums) => {
+  const newAlbumHTML = filteredNewReleaseAlbums.map((item) => {
+    const artists = item.artists.map((artist) => artist.name).join(", ");
+    return `<div class="row">
+            <div class="col">
+                <div class="col-lg-8">
+                    <img class="album-img-size" src=${item.images[0].url} alt="">
+                </div>
+                <div class="col-lg-4">
+                    <h5>${item.name}</h5>
+                    <p>${artists}</p>
+                </div>
+            </div>
+        </div>`;
+  });
+
+  document.getElementById("lowerBar").innerHTML = newAlbumHTML.join("");
+};
+
+const drawRecommendTracks = (drawRecommendTracks) => {
+  const recommendLIstHTML = drawRecommendTracks.map((track) => {
+    const artists = track.artists.map((artist) => artist.name).join(", ");
+    return `<div id="recommendLowerBa">
+        <div class="row">
+            <div class="col">
+                <div class="col-lg-8">
+                    <img class="album-img-size" src=${track.album.images[0].url} alt="">
+                </div>
+                <div class="col-lg-4">
+                    <h5>${track.name}</h5>
+                    <p>${artists}</p>
+                </div>
+            </div>
+        </div>
+    </div>`;
+  });
+
+  document.getElementById("recommendLowerBar").innerHTML =
+    recommendLIstHTML.join("");
+};
+
+showNewReleaseAlbums();
+showRecommendTracks();
+
+const genresData = getData("https://api.spotify.com/v1/browse/categories?locale=sv_US")
+console.log("장르", genresData);
+let limit = 10;
+let genreId = "0JQ5DAqbMKFQtzIMjOW2bE" //코리아 뮤직
+let playlistsData = getData(`https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`)
+console.log("플레이리스트",playlistsData);
+
+//국내 최신곡 https://api.spotify.com/v1/playlists/37i9dQZF1DXe5W6diBL5N4
+let koreaLatestMusic = getData(`https://api.spotify.com/v1/playlists/37i9dQZF1DXe5W6diBL5N4?limit=${limit}`)
+console.log("국내최신가요1",koreaLatestMusic);
+
+// 코리안 뮤직 플레이리스트 가져오기
+const getKoeanMusic = async () => {
+    // 토큰이 없을 경우 token 요청
+    if (!token) {
+        await getToken();
+    }
+    url = new URL (`https://api.spotify.com/v1/playlists/37i9dQZF1DXe5W6diBL5N4`)
+    try {
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${token.access_token}`,
+            },
+        });
+        const data = await response.json();
+        const albums = data.tracks.items         //[0].track.album.images[2]
+        const tracks = data.tracks.items;
+        console.log("국내최신가요", albums)
+        tracks.forEach(track => {
+            console.log("음악 이름:", track.track.name);
+        });
+        return data;
+        render();
+    } catch (error) {
+        // 토큰이 만료되어 401 에러가 날 경우 토큰 다시 요청 하고 getData 다시 수행 getData는 필요에 맞춰 변경해야할듯
+        if (error.status === 401) {
+            await getToken();
+            return getData();
+        } else {
+            console.error("Error:", error);
+        }
+    }
+};
+
+
+getKoeanMusic();
