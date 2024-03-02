@@ -97,27 +97,70 @@ button {
 
 .singer-image-bottom {
   display: flex;
+  align-items: center;
 }
+
 .singer-image-bottom img:hover {
   cursor: pointer;
 }
+
+#artist-area{
+  display: flex;
+  margin: 30px 0 50px;
+  padding: 0 60px;
+}
+#artist-area .singer-image-top{
+  margin-right: 240px;
+}
+.singer-image-top img{
+  width: 240px;
+  border-radius: 170px;
+}
+.singer-image-top span{
+  font-size: 40px;
+  font-weight: 600;
+  margin-left: 20px;
+}
+.singer-image-bottom .linked_artist{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 30px;
+}
+.singer-image-bottom .linked_img img{
+  width: 130px;
+  border-radius: 110px;
+}
+
 #album-area {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 60px;
 }
-.album-container {
+#album-area .album-container {
   display: flex;
   flex-direction: column;
+}
+.album-container img{
+  width: 200px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 .album-container img:hover {
   cursor: pointer;
 }
 #track-area {
-  display: flex;
-  flex-direction: row;
+  margin: 20px 60px;
 }
-.track-container {
-  flex-direction: column;
+.track-container{
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+.track-container img{
+  width: 62px;
 }
 
 /* 트랙리스트 css */

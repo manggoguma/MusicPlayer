@@ -30,11 +30,12 @@ export const drawReset = () => {
 export const drawError = (err) => {
   let errorHTML = `
   <div id="artist-area">
-  <!-- 아티스트 정보 -->
+    <!-- 아티스트 정보 -->
   <div id="singer-top" class="singer-image-top">
       <!-- 메인 가수 -->
   </div>
   <div id="singer-bottom" class="singer-image-bottom">
+    <div class="linked_area">
       <!-- 서브 가수 -->
   </div>
 </div>
@@ -57,20 +58,22 @@ export const drawArtist = ({ artists }) => {
   document.getElementById("singer-top").innerHTML = `
     <img src="${
       artistData[0].images[0]?.url || "./image/no_image.jpeg"
-    }" alt="${artistData[0].name}" style="width: 200px;">
+    }" alt="${artistData[0].name}" >
+    </div>
     <span>${artistData[0].name}</span>`;
   let artistHTML = ``;
   if (artistData.length > 1) {
     let num = artistData.length > 4 ? 4 : artistData.length;
     for (let i = 1; i < num; i++) {
       artistHTML += `
-        <div>
+        <div class="linked_artist">
+          <div class="linked_img">
             <img src="${
               artistData[i].images[0]?.url || "./image/no_image.jpeg"
             }" alt="${artistData[i].name}" onclick="search('${
         artistData[i].name
-      }')" style="width: 50px;">
-            <span>${artistData[i].name}</span>
+      }')" ></div>
+          <span>${artistData[i].name}</span>
         </div>
         `;
     }
@@ -95,7 +98,7 @@ export const drawAlbum = ({ albums }) => {
       <div class="album-container">
       <img src="${albumObj.img}" alt="${
       albumObj.name
-    }" style="width: 100px;" onclick="searchAlbum('${albumObj.id}')">
+    }" onclick="searchAlbum('${albumObj.id}')">
       <span>${
         albumObj.albumName.length > 20
           ? albumObj.albumName.substring(0, 20) + "..."
@@ -122,13 +125,15 @@ export const drawTrack = ({ tracks }) => {
     };
     trackHTML += `
           <div class="track-container">
-          <img src="${trackObj.img}" alt="" style="width: 100px;">
-          <span>${
+            <div class="col-4">
+              <img src="${trackObj.img}" alt="">
+            </div>
+          <span class="col-4">${
             trackObj.trackName.length > 20
               ? trackObj.trackName.substring(0, 20) + "..."
               : trackObj.trackName
           }</span>
-          <span>${trackObj.artistName}</span>
+          <span class="col-4">${trackObj.artistName}</span>
       </div>
           `;
     document.getElementById("track-area").innerHTML = trackHTML;
