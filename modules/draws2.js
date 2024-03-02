@@ -66,6 +66,55 @@ export const drawPlayListDetail = (playlistRes) => {
   playlistContainer.innerHTML = playlistHTML;
 };
 
+// 앨범 디테일 - 명은님껄 사용한 춘모
+export const drawAlbumDetail = (albumRes) => {
+  const playlistContainer = document.getElementById("playlist-info");
+  let albumHTML = `<div class="track_info_box">
+        <img id="img" src="${albumRes?.images[0]?.url}" ?? "https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-music-@576.png">
+        <div class="track_info">
+          <h2>${albumRes.name}</h2>
+          <p class="top_text">${albumRes.artists[0].name}</p>
+          <p class="bottom_text">release_date: ${albumRes.release_date}</p>
+          <button class="down_icon"><i class="fa-regular fa-square-plus"></i>보관함에 저장</button>
+          <div class="icon_area">
+            <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+            <button class="random"><i class="fa-solid fa-shuffle"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="row list_title">
+        <div class="col-1">#</div>
+        <div class="col-3">TITTLE</div>
+        <div class="col-3">MUSICIAN</div>
+        <div class="col-1 play_time"><i class="fa-regular fa-clock"></i></div>
+      </div>
+      <ul class="track_container">
+    `;
+
+  const trackData = albumRes.tracks.items;
+  console.log(trackData);
+  trackData.forEach((data, index) => {
+    const albumDatas = {
+      duration:
+        duration(data?.duration_ms) == `NaN:NaN`
+          ? "-"
+          : duration(data?.duration_ms),
+    };
+    albumHTML += `
+      <li class="row track_music">
+        <div class="col-1">${index + 1}</div>
+        <div class="col-3 name">${data?.name ?? "-"}</div>
+        <div class="col-3">${
+          data?.artists.map((artist) => artist.name).join(", ") ?? "-"
+        }</div>
+        <div class="col-lg-1 timer">${albumDatas.duration}</div>
+      </li>
+    `;
+  });
+  albumHTML += `</ul>`;
+  playlistContainer.innerHTML = albumHTML;
+};
+
 // New release for you - 하은님 1
 export const drawNewReleaseAlbums = (filteredNewReleaseAlbums) => {
   const newAlbumHTML = filteredNewReleaseAlbums.map((item) => {

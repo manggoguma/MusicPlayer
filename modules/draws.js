@@ -1,5 +1,15 @@
 import { duration } from "./duration.js";
 
+// 에러 보여주기
+export const drawError = (err) => {
+  let errorHTML = `
+  <div>
+  ${err}
+</div>
+  `;
+  document.getElementById("content").innerHTML = errorHTML;
+};
+
 // 화면 리셋하기
 export const drawPlayList = () => {
   let playListHTML = `
@@ -39,32 +49,6 @@ export const drawSearch = () => {
           </div>
         </div>`;
   document.getElementById("content").innerHTML = searchHTML;
-};
-
-// 에러 보여주기
-export const drawError = (err) => {
-  let errorHTML = `
-  <div id="artist-area">
-    <!-- 아티스트 정보 -->
-  <div id="singer-top" class="singer-image-top">
-      <!-- 메인 가수 -->
-  </div>
-  <div id="singer-bottom" class="singer-image-bottom">
-    <div class="linked_area">
-      <!-- 서브 가수 -->
-  </div>
-</div>
-<div id="album-area">
-  <!-- 앨범 정보 -->
-  <div>
-  ${err}
-</div>
-</div>
-<div id="track-area">
-  <!-- 곡 정보 -->
-</div>
-  `;
-  document.getElementById("content").innerHTML = errorHTML;
 };
 
 // 아티스트 내용 보여주기

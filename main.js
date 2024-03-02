@@ -1,4 +1,4 @@
-import { resDataCheck, qCheck } from "./modules/checks.js";
+import { resDataCheck, qCheck, resDataCheck2 } from "./modules/checks.js";
 import {
   drawError,
   drawSearch,
@@ -12,10 +12,12 @@ import {
   drawPlayListDetail,
   drawRecommendPlaylist,
   drawRecommendTracks,
+  drawAlbumDetail,
 } from "./modules/draws2.js";
 import { getData, spotifySearch } from "./modules/getData.js";
 import { spotifyURLs } from "./modules/urls.js";
 
+const spotifyURL = spotifyURLs.spotifyURL;
 let newReleaseAlbums;
 let newReleaseAlbumsMoreIsValid = false;
 let recommendTracks;
@@ -46,7 +48,6 @@ window.search = async (q) => {
     let albumRes = await spotifySearch({ q, type: "album" });
     let trackRes = await spotifySearch({ q, type: "track" });
 
-    console.log(trackRes);
     drawSearch();
     if (resDataCheck({ artistRes, albumRes, trackRes })) {
       drawError("검색 결과가 없습니다.");
@@ -55,6 +56,12 @@ window.search = async (q) => {
     // 아티스트는 디자인이 독특해서 값이 없으면 에러가 나므로 체크해주기
     if (artistRes?.artists?.items.length !== 0) {
       drawArtist(artistRes);
+    }
+
+    // 앨범과 노래 검색결과가 안나오는건 대부분 잘못된 검색값이므로 체크해주기
+    if (resDataCheck2({ albumRes, trackRes })) {
+      drawError("검색 결과가 없습니다.");
+      return;
     }
     drawAlbum(albumRes);
     drawTrack(trackRes);
@@ -124,8 +131,7 @@ window.searchPlaylist = async (id) => {
     if (!id) {
       return;
     }
-    let spotifyPlaylistURL = `https://api.spotify.com/v1/playlists/${id}?market=KR`;
-    let playlistRes = await getData(spotifyPlaylistURL);
+    let playlistRes = await getData(`${spotifyURL}playlists/${id}?market=KR`);
     drawPlayList();
     window.scrollTo({
       top: 0,
@@ -138,31 +144,28 @@ window.searchPlaylist = async (id) => {
   }
 };
 
+// 앨범 id 가져와서 그리기
+window.searchAlbum = async (id) => {
+  try {
+    if (!id) {
+      return;
+    }
+    let albumRes = await getData(`${spotifyURL}albums/${id}?market=KR`);
+    drawPlayList();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+    });
+    drawAlbumDetail(albumRes);
+  } catch (err) {
+    console.error(err);
+    drawError(err);
+  }
+};
+
 const mainPage = () => {
   showNewReleaseAlbums();
   showRecommendTracks();
   getRecommendPlaylist();
 };
 mainPage();
-
-// // 앨범 검색 기능
-// window.searchAlbum = async (id) => {
-//   try {
-//     if (!id) {
-//       return;
-//     }
-//     let spotifyAlbumURL = `${spotifyURL}albums/${id}?market=KR`;
-//     let albumRes = await getData(spotifyAlbumURL);
-//     drawAlbumDetail(albumRes);
-//   } catch (err) {
-//     console.error(err);
-//     drawError(err);
-//   }
-// };
-
-// const drawAlbumDetail = (albumRes) => {
-//   const trackData = albumRes.tracks.items;
-//   trackData.forEach((data, index) => {
-//     console.log(index + 1, data.name);
-//   });
-// };
