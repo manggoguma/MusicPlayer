@@ -96,9 +96,9 @@ export const drawAlbum = ({ albums }) => {
     };
     albumHTML += `
       <div class="album-container">
-      <img src="${albumObj.img}" alt="${
-      albumObj.name
-    }" onclick="searchAlbum('${albumObj.id}')">
+      <img src="${albumObj.img}" alt="${albumObj.name}" onclick="searchAlbum('${
+      albumObj.id
+    }')">
       <span>${
         albumObj.albumName.length > 20
           ? albumObj.albumName.substring(0, 20) + "..."
