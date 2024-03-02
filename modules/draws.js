@@ -8,7 +8,6 @@ export const drawPlayList = () => {
                 <!-- 플레이리스트 -->
             </div>
         </div>
-    </div>
   `;
   document.getElementById("content").innerHTML = playListHTML;
 };
