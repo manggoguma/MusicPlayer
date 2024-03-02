@@ -35,8 +35,10 @@ button {
   padding: 0 60px;
 }
 .navbar .box .nav-logo {
-  width: 240px;
-  display: flex;
+  margin-right: 60px;
+}
+.navbar .box .nav-logo a{
+  display: block;
 }
 .navbar .box .search-container {
   position: relative;
@@ -47,6 +49,7 @@ button {
   padding: 7px 50px;
   background-color: rgba(125, 125, 125, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
 }
 .navbar .box .search-container input::placeholder {
   color: #808080;
@@ -118,22 +121,26 @@ button {
 }
 
 /* 트랙리스트 css */
-.track_info_box{margin: 50px 0;display: flex;padding: 0 40px;}
-.track_info_box img{border-radius: 10px;}
+.track_info_box{margin: 50px 0;display: flex;padding: 0 60px;}
+.track_info_box img{border-radius: 10px;width: 250px;height: 250px;}
 .track_info_box .track_info{padding-left: 50px;}
-.track_info h2{font-size: 50px;font-weight: 800;}
+.track_info h2{font-size: 60px;font-weight: 800;}
 .track_info .top_text{font-size: 22px;color: rgba(255,255,255,0.7);}
-.track_info .bottom_text{font-size: 16px;font-weight: 400;color: rgba(255,255,255,0.7);margin-bottom: 25px;}
+.track_info .bottom_text{font-size: 16px;font-weight: 400;color: rgba(255,255,255,0.7);}
+.track_info .icon_area{display: inline-block;}
 .track_info .down_icon{border: 1px solid rgba(255,255,255,0.3);;border-radius: 25px;padding: 8px 20px;font-size: 15px;color: rgba(255,255,255,0.7);margin-right: 20px;}
 .track_info .down_icon:hover,.track_info .down_icon:focus,.track_info .down_icon:active{background-color: rgba(135, 135, 135,0.4);}
-.track_info .fa-square-plus{padding-right: 10px;}
-.track_info .heart-btn{font-size: 23px;}
 
+.track_info .fa-square-plus{padding-right: 10px;}
+.track_info .heart-btn{font-size: 23px;padding-right: 20px;}
+.track_info .random{font-size: 23px;}
+.track_info .random:hover,.track_info .random:active,.track_info .random:focus{color: #27ae60;}
 
 .track_container .list_title{padding: 0 40px 20px 40px;}
 .track_container .list_title div{display: flex;justify-content: center;font-size: 17px;font-weight: 700;color: #B3B3B3;}
+.track_container .list_title::after{content: "";width: 98%;background-color: #B3B3B3;height: 1px;margin: 20px auto 0;}
 
-.track_container .track_container{border-top: 1px solid #B3B3B3;padding: 20px 40px 0 40px;}
+.track_container .track_container{padding: 20px 40px 0 40px;}
 .track_container .track_music div{display: flex;justify-content: center;padding: 10px 0;text-align: center;color: #B3B3B3;align-items: center;}
 .track_container .track_music .name{color: #fff;font-weight: 700;font-size: 18px;}
 .track_container .album-cover{width: 60px;height: 60px;}
@@ -252,3 +259,73 @@ button {
 .ect-bar .progress-container .progress:active {
   background-color: #fff;
 }
+
+/* 트랙리스트 css */
+.track_info_box{margin: 50px 0;display: flex;padding: 0 60px;}
+.track_info_box img{border-radius: 10px;width: 250px;height: 250px;}
+.track_info_box .track_info{padding-left: 50px;}
+.track_info h2{font-size: 60px;font-weight: 800;}
+.track_info .top_text{font-size: 22px;color: rgba(255,255,255,0.7);}
+.track_info .bottom_text{font-size: 16px;font-weight: 400;color: rgba(255,255,255,0.7);}
+.track_info .icon_area{display: inline-block;}
+.track_info .down_icon{border: 1px solid rgba(255,255,255,0.3);;border-radius: 25px;padding: 8px 20px;font-size: 15px;color: rgba(255,255,255,0.7);margin-right: 20px;}
+.track_info .down_icon:hover,.track_info .down_icon:focus,.track_info .down_icon:active{background-color: rgba(135, 135, 135,0.4);}
+
+.track_info .fa-square-plus{padding-right: 10px;}
+.track_info .heart-btn{font-size: 23px;padding-right: 20px;}
+.track_info .random{font-size: 23px;}
+.track_info .random:hover,.track_info .random:active,.track_info .random:focus{color: #27ae60;}
+
+.track_container .list_title{padding: 0 40px 20px 40px;}
+.track_container .list_title div{display: flex;justify-content: center;font-size: 17px;font-weight: 700;color: #B3B3B3;}
+.track_container .list_title::after{content: "";width: 98%;background-color: #B3B3B3;height: 1px;margin: 20px auto 0;}
+
+.track_container .track_container{padding: 20px 40px 0 40px;}
+.track_container .track_music div{display: flex;justify-content: center;padding: 10px 0;text-align: center;color: #B3B3B3;align-items: center;}
+.track_container .track_music .name{color: #fff;font-weight: 700;font-size: 18px;}
+.track_container .album-cover{width: 60px;height: 60px;}
+
+@media (max-width: 992px) {
+  .navbar .box{display: flex;justify-content: space-between;}
+  .navbar .box .search-container input {width: 260px;}
+  .navbar .box .search-container input::placeholder {font-size: 15px;}
+  .container {margin: 100px auto 200px;}
+
+  .track_info_box img{width: 200px;height: 200px;}
+  .track_info h2{font-size: 40px;}
+  .track_info .bottom_text{margin-bottom: 25px;}  
+  .track_info .heart-btn{font-size: 20px;}
+  .track_info .random{font-size: 20px;}
+  
+
+  .track_container .list_title div{font-size: 14px;}
+  .track_container .list_title .play_time{display: none;}
+  
+  .track_container .track_container{padding: 0 40px;}
+  .track_container .track_music .name{font-size: 14px;}
+  .track_container .track_music div{font-size: 13px;}
+  .track_container .album-cover{width: 40px;height: 40px;}
+  .track_container .track_music .timer{display: none;}
+
+}
+
+@media (max-width: 665px) {
+  .track_info h2{font-size: 36px;}
+  .track_info .icon_area{margin-top: 20px;}
+  .navbar .box .btn {display: none;}
+}
+
+
+@media (max-width: 576px) {
+  .navbar .box {padding: 0 20px;}
+  .track_info_box{display:block;}
+  .track_info_box img{width: 100%;height: 100%;margin-bottom: 30px;}
+  .track_info_box .track_info{padding-left: 0;text-align: center;}
+  .track_container .list_title{display: none;}
+  .track_container .track_music div{width: 20%;}
+  .track_container .track_music div:first-child{width: 10%;}  
+  .track_container .track_music .name{width: 50%;}
+  .track_container .track_music .album{display: none;}
+  
+}
+

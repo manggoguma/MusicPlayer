@@ -24,7 +24,7 @@ let spotifyUrl = `https://api.spotify.com/v1/`;
 
 // 검색용 함수
 const spotifySearch = ({ q, type }) => {
-  let url = `${spotifyUrl}search?q=${q}&type=${type}`;
+  let url = `${spotifyUrl}search?q=${q}&type=${type}&limit=8`;
   return getData(url);
 };
 
@@ -84,13 +84,16 @@ const drawPlayListDetail = (playlistRes) => {
   const playlistContainer = document.getElementById("playlist-info");
 
   let playlistHTML = `<div class="track_info_box">
-      <img id="img" class="" width="250" src="${playlistRes?.images[0]?.url}" ?? "https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-music-@576.png">
+      <img id="img" src="${playlistRes?.images[0]?.url}" ?? "https://www.gstatic.com/youtube/media/ytm/images/pbg/liked-music-@576.png">
       <div class="track_info">
         <h2>${playlistRes.name}</h2>
         <p class="top_text">${playlistRes.owner.display_name}</p>
         <p class="bottom_text">Total Tracks: ${playlistRes.tracks.total}</p>
-        <button class="down_icon"><i class="fa-regular fa-square-plus"></i>보관함 저장하기</button>
-        <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+        <button class="down_icon"><i class="fa-regular fa-square-plus"></i>보관함에 저장</button>
+        <div class="icon_area">
+          <button class="heart-btn"><i class="fa-regular fa-heart"></i></button>
+          <button class="random"><i class="fa-solid fa-shuffle"></i></button>
+        </div>
       </div>
     </div>
     <div class="row list_title">
@@ -98,8 +101,8 @@ const drawPlayListDetail = (playlistRes) => {
       <div class="col-1"></div>
       <div class="col-3">TITTLE</div>
       <div class="col-3">MUSICIAN</div>
-      <div class="col-3">ALBUM</div>
-      <div class="col-1"><i class="fa-regular fa-clock"></i></div>
+      <div class="col-lg-3 col-sm-4 album">ALBUM</div>
+      <div class="col-1 play_time"><i class="fa-regular fa-clock"></i></div>
     </div>
     <ul class="track_container">
   `;
@@ -126,10 +129,10 @@ const drawPlayListDetail = (playlistRes) => {
     <div class="col-3">${data.track.artists
       .map((artist) => artist.name)
       .join(", ")}</div>
-    <div class="col-3" onclick="searchAlbum('${albumDatas.albumId}')">${
+    <div class="col-lg-3 col-sm-4 album" onclick="searchAlbum('${albumDatas.albumId}')">${
       albumDatas.albumName
     } </div>
-    <div class="col-1">${albumDatas.duration}</div>
+    <div class="col-lg-1 timer">${albumDatas.duration}</div>
   </li>
 `;
   });
