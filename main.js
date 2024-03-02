@@ -197,7 +197,7 @@ const getRecommendTracks = async () => {
   return getRecommendTracksRes.tracks;
 };
 
-const showRecommendTracks = async () => {
+window.showRecommendTracks = async () => {
   if (!recommendTracks) {
     recommendTracks = await getRecommendTracks();
   }
