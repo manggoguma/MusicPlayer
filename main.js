@@ -41,6 +41,8 @@ window.search = async (q) => {
     let albumRes = await spotifySearch({ q, type: "album" });
     let trackRes = await spotifySearch({ q, type: "track" });
 
+    console.log(artistRes);
+
     if (resDataCheck({ artistRes, albumRes, trackRes })) {
       drawError("검색 결과가 없습니다.");
       return;
@@ -129,9 +131,9 @@ const drawPlayListDetail = (playlistRes) => {
     <div class="col-3">${data.track.artists
       .map((artist) => artist.name)
       .join(", ")}</div>
-    <div class="col-lg-3 col-sm-4 album" onclick="searchAlbum('${albumDatas.albumId}')">${
-      albumDatas.albumName
-    } </div>
+    <div class="col-lg-3 col-sm-4 album" onclick="searchAlbum('${
+      albumDatas.albumId
+    }')">${albumDatas.albumName} </div>
     <div class="col-lg-1 timer">${albumDatas.duration}</div>
   </li>
 `;
