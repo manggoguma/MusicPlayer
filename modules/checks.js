@@ -11,3 +11,11 @@ export const resDataCheck = ({ artistRes, albumRes, trackRes }) => {
   )
     return true;
 };
+
+export const resDataCheck2 = ({ albumRes, trackRes }) => {
+  if (
+    albumRes?.albums?.items.length === 0 &&
+    trackRes?.tracks?.items.length === 0
+  )
+    return true;
+};
