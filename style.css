@@ -135,6 +135,30 @@ button {
   background-color: #202020;
 }
 
+#lowerBar .col,
+#recommendLowerBa .col,
+#recommendListLowerBar .col {
+  height: 250px;
+  box-shadow: 2px 2px 3px #666;
+  border-radius: 10%;
+  background-color: #202020;
+}
+#lowerBar .col:hover,
+#lowerBar .col:focus,
+#lowerBar .col:active,
+#recommendLowerBa .col:hover,
+#recommendLowerBa .col:focus,
+#recommendLowerBa .col:active,
+#recommendListLowerBar .col:hover,
+#recommendListLowerBar .col:focus,
+#recommendListLowerBar .col:active{
+  background-color: rgba(32, 32, 32,0.3);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+
+
 .recommendCol {
   width: 80wh;
   height: 250px;
@@ -250,6 +274,13 @@ button {
   align-items: center;
   padding-right: 50px;
 }
+.singer-image-bottom .linked_artist:hover,
+.singer-image-bottom .linked_artist:focus,
+.singer-image-bottom .linked_artist:active{
+  opacity: 0.5;
+  cursor: pointer;
+}
+
 .singer-image-bottom .linked_artist span {
   font-size: 18px;
   padding-top: 10px;
@@ -276,6 +307,13 @@ button {
   flex-direction: column;
   padding-right: 20px;
 }
+#album-area .album-container:hover,
+#album-area .album-container:focus,
+#album-area .album-container:active{
+  background-color: rgba(32, 32, 32,0.3);
+  opacity: 0.5;
+  cursor: pointer;
+}
 .album-container img {
   width: 13vw;
   border-radius: 5px;
@@ -300,6 +338,12 @@ button {
   padding: 20px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+.track-container .img:hover,
+.track-container .img:focus,
+.track-container .img:active{
+  opacity: 0.5;
+  cursor: pointer;
+}
 .track-container img {
   width: 62px;
 }
@@ -307,6 +351,10 @@ button {
   font-weight: 700;
   font-size: 18px;
   color: #fff;
+}
+.track-container .name:hover{
+  text-decoration: underline;
+  cursor: pointer;
 }
 .track-container span {
   text-align: center;
@@ -613,14 +661,35 @@ button {
   color: #b3b3b3;
   align-items: center;
 }
+.track_container .track_music .album:hover,
+.track_container .track_music .album:focus,
+.track_container .track_music .album:active{
+  cursor: pointer;
+  text-decoration: underline;
+}
 .track_container .track_music .name {
   color: #fff;
   font-weight: 700;
   font-size: 18px;
+  
 }
+.track_container .track_music .name:hover,
+.track_container .track_music .name:focus,
+.track_container .track_music .name:active{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .track_container .album-cover {
   width: 60px;
   height: 60px;
+}
+
+.track_container .album-cover:hover,
+.track_container .album-cover:focus,
+.track_container .album-cover:active{
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 @media (max-width: 1200px) {
