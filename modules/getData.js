@@ -1,7 +1,7 @@
 // import { keys } from "../keys.js";
 // let { client_id, client_secret } = keys;
-const client_id = client_id;
-const client_secret = client_secret;
+const client_id = process.env.client_id;
+const client_secret = process.env.client_secret;
 
 let spotifyURL = `https://api.spotify.com/v1/`;
 
