@@ -673,12 +673,7 @@ button {
   font-size: 18px;
   
 }
-.track_container .track_music .name:hover,
-.track_container .track_music .name:focus,
-.track_container .track_music .name:active{
-  text-decoration: underline;
-  cursor: pointer;
-}
+
 
 .track_container .album-cover {
   width: 60px;
