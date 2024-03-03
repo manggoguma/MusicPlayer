@@ -143,17 +143,17 @@ export const drawTrack = ({ tracks }) => {
     console.log(trackObj.albumName, trackObj.duration);
     trackHTML += `
           <div class="track-container row">
-            <div class="col-2">
+            <div class="col-md-2 col-sm-4 img">
               <img src="${trackObj.img}" alt="">
             </div>
-          <span class="col-2 name">${
+          <span class="col-md-2 col-sm-4 name">${
             trackObj.trackName.length > 20
               ? trackObj.trackName.substring(0, 20) + "..."
               : trackObj.trackName
           }</span>
-          <span class="col-2">${trackObj.artistName}</span>
-          <span class="col-4">${trackObj.albumName}</span>
-          <span class="col-2">${trackObj.duration}</span>
+          <span class="col-md-2 col-sm-4 artist">${trackObj.artistName}</span>
+          <span class="col-md-4 album">${trackObj.albumName}</span>
+          <span class="col-md-2 timer">${trackObj.duration}</span>
       </div>
           `;
     document.getElementById("track-area").innerHTML = trackHTML;
