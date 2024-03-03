@@ -352,6 +352,10 @@ button {
   font-size: 18px;
   color: #fff;
 }
+.track-container .album:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
 .track-container span {
   text-align: center;
   color: #b3b3b3;
