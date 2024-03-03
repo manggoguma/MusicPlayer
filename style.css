@@ -472,7 +472,7 @@ button {
 
 @media (max-width: 992px) {
   .navbar .box{display: flex;justify-content: space-between;}
-  .navbar .box .search-container input {width: 260px;}
+  .navbar .box .search-container input {width: 35vw;padding: 7px 18px;}
   .navbar .box .search-container input::placeholder {font-size: 15px;}
   .container {margin: 100px auto 200px;}
 
