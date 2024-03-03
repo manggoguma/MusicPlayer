@@ -122,12 +122,15 @@ export const drawTrack = ({ tracks }) => {
       trackName: data.name,
       artistName: data.artists[0].name,
       albumName: data.album.name,
+      id: data.album.id,
       duration: duration(data.duration_ms),
     };
     trackHTML += `
           <div class="track-container row">
             <div class="col-md-2 col-sm-4 img">
-              <img src="${trackObj.img}" alt="">
+              <img src="${trackObj.img}" alt="${
+      trackObj.albumName
+    }" onclick="searchAlbum('${trackObj.id}')">
             </div>
           <span class="col-md-2 col-sm-4 name">${
             trackObj.trackName.length > 20
@@ -135,7 +138,9 @@ export const drawTrack = ({ tracks }) => {
               : trackObj.trackName
           }</span>
           <span class="col-md-2 col-sm-4 artist">${trackObj.artistName}</span>
-          <span class="col-md-4 album">${trackObj.albumName}</span>
+          <span class="col-md-4 album" onclick="searchAlbum('${
+            trackObj.id
+          }')">${trackObj.albumName}</span>
           <span class="col-md-2 timer">${trackObj.duration}</span>
       </div>
           `;
