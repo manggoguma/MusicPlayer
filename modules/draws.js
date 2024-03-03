@@ -124,7 +124,6 @@ export const drawTrack = ({ tracks }) => {
       albumName: data.album.name,
       duration: duration(data.duration_ms),
     };
-    console.log(trackObj.albumName, trackObj.duration);
     trackHTML += `
           <div class="track-container row">
             <div class="col-md-2 col-sm-4 img">

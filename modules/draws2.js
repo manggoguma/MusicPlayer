@@ -84,15 +84,16 @@ export const drawAlbumDetail = (albumRes) => {
       </div>
       <div class="row list_title">
         <div class="col-1">#</div>
+        <div class="col-1"></div>
         <div class="col-3">TITTLE</div>
         <div class="col-3">MUSICIAN</div>
+        <div class="col-lg-3 col-sm-4 album">ALBUM</div>
         <div class="col-1 play_time"><i class="fa-regular fa-clock"></i></div>
       </div>
       <ul class="track_container">
     `;
 
   const trackData = albumRes.tracks.items;
-  console.log(trackData);
   trackData.forEach((data, index) => {
     const albumDatas = {
       duration:
@@ -103,10 +104,15 @@ export const drawAlbumDetail = (albumRes) => {
     albumHTML += `
       <li class="row track_music">
         <div class="col-1">${index + 1}</div>
+        <div class="col-1"><img src="${
+          albumRes?.images[0]?.url
+        }" alt="Album cover for ${albumRes.name}" class="album-cover"></div>
+  
         <div class="col-3 name">${data?.name ?? "-"}</div>
         <div class="col-3">${
           data?.artists.map((artist) => artist.name).join(", ") ?? "-"
         }</div>
+        <div class="col-lg-3 col-sm-4 album" >${albumRes.name} </div>
         <div class="col-lg-1 timer">${albumDatas.duration}</div>
       </li>
     `;
