@@ -128,7 +128,7 @@ export const drawNewReleaseAlbums = (filteredNewReleaseAlbums) => {
     return `<div class="row">
               <div class="col">
                   <div class="col-lg-8">
-                      <img class="album-img-size" src=${item.images[0].url} alt="">
+                      <img class="album-img-size" src=${item.images[0].url} alt="" onclick="searchAlbum('${item.id}')">
                   </div>
                   <div class="col-lg-4">
                       <h5>${item.name}</h5>
@@ -149,7 +149,7 @@ export const drawRecommendTracks = (drawRecommendTracks) => {
           <div class="row">
               <div class="col">
                   <div class="col-lg-8">
-                      <img class="album-img-size" src=${track.album.images[0].url} alt="">
+                      <img class="album-img-size" src=${track.album.images[0].url} alt="" onclick="searchAlbum('${track.album.id}')">
                   </div>
                   <div class="col-lg-4">
                       <h5>${track.name}</h5>
