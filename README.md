@@ -1,12 +1,15 @@
 # 🎵 Music
 
-gif 자리
+<!-- gif 자리 -->
+
 <hr>
 
-## 🕹️ 데모 : []()
+## 🕹️ 데모 : [누나 플레이어 데모](https://noona-music.netlify.app/)
+
 <hr>
 
 # 🦾 기능
+
 - 메인페이지에서는 최신 출시앨범, K-POP 음악, 추천 플레이 리스트 목록을 볼 수 있습니다.
 - more 버튼을 통해 더 많은 내용을 볼 수 있습니다.
 - 앨범을 클릭할 경우 해당 앨범의 자세한 내용을 볼 수 있습니다.
@@ -17,11 +20,14 @@ gif 자리
 <hr>
 
 # 🧑🏻‍💻👩🏻‍💻 사용한 기술
+
 - HTML/CSS
 - JavaScript
+- ++ express
 <hr>
 
 # 👨‍👩‍👧‍👦 팀원
+
 - [조명은](https://github.com/lightmyeongeun)
 - [양춘모](https://github.com/SpringDream0406)
 - [남하은](https://github.com/manggoguma)
@@ -29,4 +35,5 @@ gif 자리
 <hr>
 
 ## ℹ️ API
+
 [스포티파이API](https://developer.spotify.com/documentation/web-api)
