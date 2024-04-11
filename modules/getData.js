@@ -67,7 +67,7 @@ const spotifyURL = `https://api.spotify.com/v1/`;
 
 export const getData = async (url) => {
   try {
-    const response = await fetch(TEST_URL, {
+    const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
