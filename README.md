@@ -1,9 +1,6 @@
 # 🎵 Music
 
-![Alt 텍스트](image/Clear.gif)
-<img src="image/Clear.gif" width="100" height="100" alt="테스트">
-
-<!-- gif 자리 -->
+![Alt 텍스트](image/readme-sample.gif)
 
 <hr>
 
