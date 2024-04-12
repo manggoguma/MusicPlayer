@@ -75,7 +75,6 @@ export const getData = async (url) => {
       body: JSON.stringify({ url: url }),
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
