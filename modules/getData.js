@@ -61,7 +61,7 @@
 // };
 
 const TEST_URL = "http://localhost:3001/getData/";
-const API_URL = "https://noona-music.netlify.app/getData";
+const API_URL = "https://noona-music.netlify.app";
 const spotifyURL = `https://api.spotify.com/v1/`;
 
 export const getData = async (url) => {

@@ -1,1 +1,1 @@
-/api/* http://43.203.95.172/:splat 200
+/api/* http://43.203.95.172/getData:splat 200
