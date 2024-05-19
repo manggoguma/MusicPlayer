@@ -61,8 +61,7 @@
 // };
 
 const TEST_URL = "http://localhost:3001/getData/";
-const API_URL =
-  "https://port-0-noona-music-server-2aat2cluv6amup.sel5.cloudtype.app/getData";
+const API_URL = "43.203.95.172";
 const spotifyURL = `https://api.spotify.com/v1/`;
 
 export const getData = async (url) => {
