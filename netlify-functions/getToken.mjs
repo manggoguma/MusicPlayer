@@ -1,11 +1,12 @@
-const fetch = require("node-fetch");
-const querystring = require("querystring");
+import fetch from "node-fetch";
+import { Buffer } from "buffer";
+import querystring from "querystring";
 
 const encodeCredentials = (clientId, clientSecret) => {
   return Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
 };
 
-exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   const client_id = process.env.SPOTIFY_CLIENT_ID;
   const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
