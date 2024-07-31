@@ -5,7 +5,7 @@ let token;
 // 토큰 요청 함수
 const getToken = async () => {
   try {
-    const reponse = await fetch("/.netlify/function/getToken");
+    const reponse = await fetch("/.netlify/functions/getToken");
     token = await reponse.json();
   } catch (error) {
     console.error(error);
