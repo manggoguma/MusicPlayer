@@ -23,7 +23,8 @@
 
 - HTML/CSS
 - JavaScript
-- ++ express
+- ~~++ express~~
+- ++ Netlify Functions
 <hr>
 
 # 👨‍👩‍👧‍👦 팀원

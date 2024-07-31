@@ -7,7 +7,6 @@ const getToken = async () => {
   try {
     const reponse = await fetch("/.netlify/functions/getToken");
     token = await reponse.json();
-    console.log(token);
   } catch (error) {
     console.error("getToken", error);
   }

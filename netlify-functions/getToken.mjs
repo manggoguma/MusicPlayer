@@ -7,6 +7,7 @@ const encodeCredentials = (clientId, clientSecret) => {
 };
 
 export const handler = async (event, context) => {
+  // netlify 환경변수로 값 입력
   const client_id = process.env.SPOTIFY_CLIENT_ID;
   const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
